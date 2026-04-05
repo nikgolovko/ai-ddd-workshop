@@ -209,10 +209,10 @@ ___________________________________________________________
 | 2026-04-07
 
 | Facilitator
-| Dr. N. Golovko
+| _____
 
 | Location / Room
-| Workshop Room B2, Siemens Erlangen
+| Workshop Room B2, _____
 
 | Participants
 | Petra K. (Quality Engineer) · Sven M. (ML Engineer) · Jana R. (Plant Manager) · Tim B. (Product Owner)

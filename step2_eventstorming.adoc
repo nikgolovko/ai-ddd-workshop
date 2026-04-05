@@ -218,7 +218,7 @@ Draw a boundary around events that naturally cluster together. Name the cluster.
 | 2026-04-07
 
 | Facilitator
-| Dr. N. Golovko
+| _____
 
 | Participants
 | Petra K. (Quality Engineer) · Sven M. (ML Engineer) · Lukas D. (Data Engineer) · Tim B. (Product Owner)

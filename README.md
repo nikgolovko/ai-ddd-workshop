@@ -9,10 +9,13 @@ A complete facilitator's script for running seven Domain-Driven Design sessions 
 
 ### Business Context
 The system operates on a steel panel production line (Line 3) at manufacturing facility. The line runs three shifts per day, seven days a week. At current throughput, the edge vision node inspects several thousand panels per shift.
+
 *The core business problem* is defect escape: defective panels that pass through the inspection station undetected and are confirmed as defective only downstream — after further processing, packaging, or in the worst case, at the customer. The baseline defect escape rate entering this workshop is 12 escapes per 1,000 inspected units. The business goal is to reduce this to 8.4 or fewer — a 30% improvement — within six months of production deployment.
+
 *Three organisational pressures drive the urgency.*
 The first is quality cost. Every escaped defect represents rework, warranty exposure, or customer dissatisfaction. At current volumes, even a marginal reduction in escape rate has a measurable financial impact.
 The second is regulatory obligation. The VQS system is classified as a high-risk AI system under the *EU AI Act.*
+
 *This classification triggers obligations around data governance (Article 10), human oversight (Article 14), transparency (Article 13), and technical documentation (Article 12 and Annex IV). The system cannot legally operate in production without these obligations met. They are not optional features — they are go-live criteria.*
 The third is operational fragility. The current system has no structured feedback path between operator behaviour and model improvement. When the model drifts — as it did during the lighting-change incident, producing 340 false positives over three days — the only discovery mechanism is an ML Engineer noticing an anomaly in a weekly report. This 72-hour gap is the primary operational risk the workshop is designed to close.
 

@@ -1,0 +1,673 @@
+= Step 5: Context Mapping
+VQS DDD Workshop · Step 5 of 7
+:doctype: article
+:icons: font
+:source-highlighter: rouge
+:toc: left
+:toc-title: Contents
+:toclevels: 2
+:sectnums:
+:sectnumlevels: 2
+
+// ============================================================
+//  ABOUT THIS DOCUMENT
+// ============================================================
+[.lead]
+This document provides two things for Step 5 of the VQS DDD Workshop:
+
+. A *blank template* for documenting every integration boundary between bounded contexts (Section 1).
+. A *fully worked example* covering all six integration boundaries in the VQS system (Section 2).
+
+Duration: *60 minutes*. +
+Goal: Name every integration relationship with a formal pattern. Agree who changes when the other changes. Document the ACL contract stubs. Mark every EU AI Act traceability boundary explicitly.
+
+=== Prerequisites from Step 4
+
+Before this session, two items from Step 4 must be resolved:
+
+[cols="3,6", options="header"]
+|===
+| Item | Why it blocks Context Mapping
+
+| H6 — RACI for retraining decision
+| Determines which team owns the Model Operations → Inspection outbound contract. Cannot draw this boundary without knowing who approves deployment.
+
+| AC-08 — Duplicate RCA job handling
+| Determines the cardinality of the RCARequested relationship between Case Management and RCA. Append vs new job changes the contract shape.
+|===
+
+=== Integration Pattern Reference
+
+[cols="2,5,3", options="header"]
+|===
+| Pattern | Meaning | Risk level
+
+| Customer-Supplier (C-S)
+| Upstream produces, downstream consumes. Upstream may dictate the contract. Downstream adapts.
+| Medium
+
+| Anti-Corruption Layer (ACL)
+| Downstream translates upstream output into its own domain model. Upstream model is untrusted.
+| Low — downstream protected
+
+| Open Host Service (OHS)
+| Upstream publishes a stable versioned API for multiple consumers. Consumers adapt to the published schema.
+| Low — stable contract
+
+| Published Language (PL)
+| Agreed shared event schema. Loosely coupled. Neither side owns the other's model.
+| Low
+
+| Conformist
+| Downstream adopts upstream's model without translation. Highest coupling — use only when translation cost exceeds risk.
+| High
+
+| Partnership
+| Two teams coordinate in lockstep. Provisional — plan to evolve to a lower-coupling pattern.
+| Very high
+|===
+
+''''
+
+// ============================================================
+//  PART I — BLANK TEMPLATE
+// ============================================================
+[[template]]
+== Template (fill during session)
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| ___________________________
+
+| Facilitator
+| ___________________________
+
+| Participants
+| ___________________________
+
+| Input from Step 4
+| 5 bounded context canvases · dependency overview table · 8 open questions
+|===
+
+=== Context Inventory
+
+List every bounded context before drawing relationships.
+
+[cols="1,3,4", options="header"]
+|===
+| # | Context name | Team owner
+
+| 1 | ___ | ___
+| 2 | ___ | ___
+| 3 | ___ | ___
+| 4 | ___ | ___
+| 5 | ___ | ___
+|===
+
+=== Relationship Registry
+
+One block per integration boundary. Copy as needed.
+
+==== Relationship ___: [Context A] → [Context B]
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| From context
+| ___
+
+| To context
+| ___
+
+| Integration pattern
+| ___ (C-S / ACL / OHS / PL / Conformist / Partnership)
+
+| Who changes when the other changes?
+| ___
+
+| Contract / schema name and version
+| ___
+
+| Payload description
+| ___
+
+| Change owner (who approves schema changes?)
+| ___
+
+| EU AI Act boundary?
+| Yes / No — if yes, describe obligation: ___
+|===
+
+*Key decisions made:*
+
+___________________________________________________________
+
+*Risks / concerns:*
+
+___________________________________________________________
+
+==== Relationship ___: [Context C] → [Context D]
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| From context
+| ___
+
+| To context
+| ___
+
+| Integration pattern
+| ___
+
+| Who changes when the other changes?
+| ___
+
+| Contract / schema name and version
+| ___
+
+| Payload description
+| ___
+
+| Change owner
+| ___
+
+| EU AI Act boundary?
+| ___
+|===
+
+*Key decisions made:*
+
+___________________________________________________________
+
+*Risks / concerns:*
+
+___________________________________________________________
+
+// (copy block above for each additional relationship)
+
+=== ACL Contract Stubs
+
+For every boundary marked with Anti-Corruption Layer, document the translation rules.
+
+==== ACL: [Upstream] → [Downstream]
+
+[cols="3,3,4", options="header"]
+|===
+| Upstream term | Downstream term | Translation rule
+
+| ___ | ___ | ___
+| ___ | ___ | ___
+| ___ | ___ | ___
+|===
+
+*Validation rules applied by ACL:*
+
+___________________________________________________________
+
+*What the ACL rejects:*
+
+___________________________________________________________
+
+=== EU AI Act Traceability Boundaries
+
+[cols="3,4,3", options="header"]
+|===
+| Boundary | Obligation | Article reference
+
+| ___ → ___ | ___ | Article ___
+| ___ → ___ | ___ | Article ___
+| ___ → ___ | ___ | Article ___
+|===
+
+=== Context Map — Narrative Summary
+
+Describe the overall shape of the map in plain language. Which context is central? Where are the highest-risk boundaries? What must not change without a formal change process?
+
+___________________________________________________________
+___________________________________________________________
+___________________________________________________________
+
+=== Open Questions After This Session
+
+[cols="1,6,3", options="header"]
+|===
+| # | Question | Owner
+
+| Q1 | ___ | ___
+| Q2 | ___ | ___
+| Q3 | ___ | ___
+|===
+
+=== Carry-Forward to Step 6: User Story Mapping
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| All relationships named with formal patterns | [ ] done
+| ACL contract stubs documented | [ ] done
+| EU AI Act boundaries marked | [ ] done
+| Change ownership agreed per boundary | [ ] done
+| Narrative summary written | [ ] done
+|===
+
+''''
+
+// ============================================================
+//  PART II — FILLED EXAMPLE
+// ============================================================
+[[example]]
+== Filled Example — VQS Edge Inspection System
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-08
+
+| Facilitator
+| Dr. N. Golovko
+
+| Participants
+| Sven M. (ML Engineer) · Tim B. (Product Owner) · Jana R. (Plant Manager) · Dev Lead · Lukas D. (Data Engineer)
+
+| Input from Step 4
+| 5 bounded context canvases · 6 integration boundaries identified · H6 resolved before session (see below) · AC-08 resolved before session (see below)
+|===
+
+==== Pre-Session Resolutions
+
+*H6 — Retraining decision RACI (resolved):*
+The Plant Manager approves all RetrainingJob initiations. The ML Engineer authors the RetrainingJob specification and presents evidence from DriftSignal analysis. The Product Owner holds veto on timing. The MLOps Platform Team executes. This is recorded as RACI-v1 and referenced in the Model Operations → Inspection outbound contract.
+
+*AC-08 — Duplicate RCA job (resolved):*
+A new OverrideWindow threshold breach for a DefectType that already has an open AnalysisJob appends the new evidence to the existing job rather than opening a duplicate. The RCARequested event carries a `job_id` field; if the job exists, the payload is appended. Contract updated to RCARequested v1.1.
+
+=== Context Inventory
+
+[cols="1,3,4", options="header"]
+|===
+| # | Context name | Team owner
+
+| 1 | Inspection (Edge) | Edge Platform Team
+| 2 | RCA (Cloud) | AI Research Team
+| 3 | Case Management (Cloud) | Quality Platform Team
+| 4 | Model Operations (Cloud) | MLOps Platform Team
+| 5 | Data / Feature (Cloud) | Data Engineering Team
+|===
+
+=== Relationship Registry
+
+==== Relationship 1: Inspection → Case Management
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| From context
+| Inspection (Edge)
+
+| To context
+| Case Management (Cloud)
+
+| Integration pattern
+| *Customer-Supplier* — Inspection is upstream, Case Management is downstream
+
+| Who changes when the other changes?
+| Case Management adapts when InspectionCase schema changes. Inspection does not change for Case Management's benefit.
+
+| Contract / schema name and version
+| InspectionCaseForwarded event — schema v1.2
+
+| Payload description
+| InspectionCase ID · panel ID · DefectType · Decision · ConfidenceScore · Override flag · ReasonCode (if override) · RCV version · DBV version · operator ID · timestamp · closed_at
+
+| Change owner
+| Edge Platform Team authors; Quality Platform Team must approve any payload change that affects Case lifecycle
+
+| EU AI Act boundary?
+| Yes — Article 10. This boundary is the intake point for audit data. ReasonCode, RCV version, and DBV version must be present on every event for traceability.
+|===
+
+*Key decisions made:*
+ConfidenceScore is included in the payload for audit purposes even though Case Management does not act on it. DBV version is included so the active decision band at time of inspection is traceable. Schema versioned — breaking changes require a migration window agreed with Quality Platform Team.
+
+*Risks / concerns:*
+Edge node EV-07 operates offline for up to 60 seconds during network interruptions. InspectionCaseForwarded events must be buffered locally and delivered at-least-once. Case Management must handle duplicate delivery idempotently.
+
+''''
+
+==== Relationship 2: RCA → Case Management (ACL)
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| From context
+| RCA (Cloud)
+
+| To context
+| Case Management (Cloud)
+
+| Integration pattern
+| *Open Host Service → Anti-Corruption Layer*. RCA publishes a stable OHS schema. Case Management's ACL layer translates into Recommendation — raw LLM output never enters Case Management's domain model.
+
+| Who changes when the other changes?
+| RCA publishes to a versioned OHS schema. Case Management's ACL adapts its translation rules independently. Neither team needs the other's approval for internal changes — only the published schema version matters.
+
+| Contract / schema name and version
+| RootCauseHypothesis — OHS schema v2.1
+
+| Payload description
+| hypothesis_text · llm_confidence [0.0–1.0] · cause_category (may be null if vocabulary gap) · evidence_refs[] · analysis_job_id · DefectType · DefectPattern ID
+
+| Change owner
+| AI Research Team owns OHS schema. Version bumps require 2-sprint notice to Quality Platform Team. Minor additions are non-breaking. Removals or type changes are breaking and require a deprecation cycle.
+
+| EU AI Act boundary?
+| Yes — Article 10. The ACL is the human oversight gate. Every Recommendation produced by the ACL must carry the analysis_job_id linking it back to the RootCauseHypothesis evidence. This linkage is required for technical documentation of AI-assisted decisions.
+|===
+
+*Key decisions made:*
+cause_category may be null in the OHS payload when the RCA model cannot classify the hypothesis. The ACL handles null cause_category by raising CauseVocabularyGap and holding the Recommendation in unclassified state. The ACL must never infer a cause_category that was not present in the payload.
+
+*Risks / concerns:*
+LLM hallucination. The OHS schema includes evidence_refs[] precisely so that the ACL can validate plausibility before creating a Recommendation. Low-confidence hypotheses (llm_confidence < 0.50) must produce a ConfidenceBucket of Low and be flagged for manual Case Manager review before any action is taken.
+
+''''
+
+==== Relationship 3: Case Management → RCA
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| From context
+| Case Management (Cloud)
+
+| To context
+| RCA (Cloud)
+
+| Integration pattern
+| *Customer-Supplier* — Case Management is upstream (it decides when to trigger), RCA is downstream (it receives the request)
+
+| Who changes when the other changes?
+| RCA adapts if RCARequested schema changes. Case Management does not change for RCA's benefit.
+
+| Contract / schema name and version
+| RCARequested event — schema v1.1 (updated from v1.0 to include job_id for AC-08 resolution)
+
+| Payload description
+| job_id (new — for deduplication) · DefectType · DefectPattern summary · Override log subset (model-error overrides only) · OverrideWindow start/end timestamps · requesting_case_id
+
+| Change owner
+| Quality Platform Team owns this contract. AI Research Team must be consulted before any change to DefectPattern payload structure.
+
+| EU AI Act boundary?
+| No direct obligation at this boundary. Indirectly: the Override log subset included in the payload must contain ReasonCodes to allow RCA to distinguish model-error patterns.
+|===
+
+*Key decisions made:*
+The RCARequested payload includes only model-error overrides (RC-03, RC-04, RC-05) — material-variation overrides are excluded. The job_id enables RCA to append evidence to an existing AnalysisJob (AC-08 resolution). Schema v1.1 is a breaking change from v1.0; a two-sprint migration window is agreed.
+
+*Risks / concerns:*
+If Case Management sends RCARequested for a DefectType with insufficient evidence (e.g. exactly three overrides with marginal confidence scores), RCA may produce a low-quality hypothesis. Minimum evidence quality thresholds should be specified in the schema.
+
+''''
+
+==== Relationship 4: Model Operations → Inspection
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| From context
+| Model Operations (Cloud)
+
+| To context
+| Inspection (Edge)
+
+| Integration pattern
+| *Customer-Supplier* — Model Operations is upstream, Inspection is downstream
+
+| Who changes when the other changes?
+| Inspection adapts when Model Operations changes the model artifact format or DBV schema. Model Operations does not change for Inspection's benefit, but must provide a migration window of at least one sprint for any breaking change.
+
+| Contract / schema name and version
+| ModelArtifact push — format v3 (ONNX, signed) + DecisionBandVersion (DBV) configuration — schema v1.0
+
+| Payload description
+| ModelArtifact: model_id · version · onnx_bytes · signature · production_lot_id (for pinning) · feature_schema_version +
+DBV: dbv_id · version · owner_role · approved_by · approved_at · review_date · bands[] (confidence_min, confidence_max, decision)
+
+| Change owner
+| MLOps Platform Team owns the push mechanism and versioning. Plant Manager approval required before any ModelArtifact is pushed to production fleet (RACI-v1).
+
+| EU AI Act boundary?
+| Yes — Article 10. ModelArtifact carries production_lot_id enabling traceability of every InspectionCase back to the model version that produced its Decision. This is a mandatory technical documentation requirement for high-risk AI system classification.
+|===
+
+*Key decisions made:*
+Model versions are pinned to production lots — a panel inspected under lot L-0449 will always be traceable to model version mv-112 even after model updates. TemporaryBandOverride activations are communicated via a separate lightweight event, not through the main push mechanism.
+
+*Risks / concerns:*
+Edge nodes may be unreachable during a push. MLOps pipeline must implement retry with exponential backoff and confirm successful activation before decommissioning the previous model version. Rollback capability is mandatory — EV-07 must retain the previous model version for at least 48 hours post-push.
+
+''''
+
+==== Relationship 5: Inspection → Model Operations (DriftSignal)
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| From context
+| Inspection (Edge)
+
+| To context
+| Model Operations (Cloud)
+
+| Integration pattern
+| *Published Language* — Inspection publishes a shared event schema. Model Operations subscribes. Neither owns the other's model.
+
+| Who changes when the other changes?
+| Neither team is obligated to adapt for the other. Schema changes to DriftSignal require agreement from both teams before publication.
+
+| Contract / schema name and version
+| DriftSignal event — Published Language schema v1.0
+
+| Payload description
+| signal_id · edge_node_id · DefectType · override_rate_24h · override_rate_baseline · model_version · dbv_version · lot_id · timestamp
+
+| Change owner
+| Both teams co-own the Published Language schema. Changes require joint sign-off.
+
+| EU AI Act boundary?
+| No direct obligation. DriftSignal is the trigger for model governance actions that do carry obligations (retraining, DBV review).
+|===
+
+*Key decisions made:*
+DriftSignal does NOT mandate retraining — it is an observation, not a command. Model Operations decides what to do with it (RACI-v1 applies). The signal includes model_version and dbv_version so Model Operations can correlate drift with specific configurations. DriftSignal is published per DefectType per edge node — not aggregated.
+
+*Risks / concerns:*
+False drift signals during planned maintenance (e.g. the lighting-change incident) will trigger Model Operations workflows unnecessarily if no context is available. Future enhancement: include an environmental_context_flags field once the sensor infrastructure is available.
+
+''''
+
+==== Relationship 6: Data / Feature → Model Operations
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| From context
+| Data / Feature (Cloud)
+
+| To context
+| Model Operations (Cloud)
+
+| Integration pattern
+| *Customer-Supplier* — Data / Feature is upstream for data delivery, Model Operations is upstream for requests
+
+| Who changes when the other changes?
+| Data / Feature adapts to RetrainingRequest specification. Model Operations adapts to TrainingDataset schema changes (with migration window).
+
+| Contract / schema name and version
+| RetrainingRequest — schema v1.0 (Model Ops → Data/Feature) +
+TrainingDataset delivery — schema v1.0 (Data/Feature → Model Ops)
+
+| Payload description
+| RetrainingRequest: request_id · DefectTypes[] · min_samples_per_type · quality_threshold · requested_by · approved_by (Plant Manager per RACI-v1) +
+TrainingDataset: dataset_id · version · DefectType_counts{} · lineage_record_id · quality_check_results · synthetic_sample_count · delivered_at
+
+| Change owner
+| MLOps Platform Team owns RetrainingRequest. Data Engineering Team owns TrainingDataset schema. Both require joint sign-off for changes.
+
+| EU AI Act boundary?
+| Yes — Article 10. TrainingDataset delivery carries lineage_record_id linking to the full DataLineage record. This is the data governance boundary. synthetic_sample_count must be non-zero if synthetic data is included, and must be documented in the technical file.
+|===
+
+*Key decisions made:*
+TrainingDataset must include DataLineage documentation before Model Operations accepts it for a RetrainingJob. A dataset without a valid lineage_record_id is rejected. synthetic_sample_count is a mandatory field — it cannot be omitted or set to null even when no synthetic data is used (it must be zero).
+
+*Risks / concerns:*
+DataGap situations may result in TrainingDatasets with insufficient real examples for rare DefectTypes. Model Operations must validate minimum sample counts before initiating a RetrainingJob. If the dataset does not meet minimum thresholds, it must be rejected and a DataGapAlert raised.
+
+''''
+
+=== ACL Contract Stubs
+
+==== ACL: RCA → Case Management
+
+[cols="3,3,5", options="header"]
+|===
+| RCA (OHS) term | Case Management term | Translation rule
+
+| hypothesis_text
+| (not stored)
+| Discarded after ConfidenceBucket assignment. Case Management never stores raw LLM text.
+
+| llm_confidence
+| ConfidenceBucket
+| ≥ 0.80 → High. 0.50–0.79 → Medium. < 0.50 → Low.
+
+| cause_category
+| Recommendation.cause_category
+| Direct mapping if cause_category exists in ACL vocabulary. Null cause_category → CauseVocabularyGap raised.
+
+| evidence_refs[]
+| Recommendation.evidence_summary
+| Stored as an opaque reference list. Case Manager can request full evidence from RCA system if needed.
+
+| analysis_job_id
+| Recommendation.rca_job_ref
+| Stored verbatim. Required for Article 10 traceability linkage.
+
+| DefectType
+| Recommendation.DefectType
+| Direct mapping.
+|===
+
+*Validation rules applied by the ACL:*
+
+. llm_confidence must be a float in [0.0, 1.0]. Values outside this range reject the payload.
+. evidence_refs[] must contain at least one entry. A hypothesis with no evidence is rejected.
+. analysis_job_id must match an open RCARequested job in Case Management. Orphaned job IDs are rejected.
+. If cause_category is present, it must exist in the current ACL vocabulary. Unknown values raise CauseVocabularyGap.
+
+*What the ACL rejects:*
+
+* Payloads with no evidence_refs
+* llm_confidence values outside [0.0, 1.0]
+* Orphaned analysis_job_id values
+* Any field not in the OHS schema v2.1 (strict schema validation)
+
+=== EU AI Act Traceability Boundaries
+
+[cols="3,5,3", options="header"]
+|===
+| Boundary | Obligation | Article reference
+
+| Inspection → Case Management
+| Every InspectionCaseForwarded event must carry ReasonCode, RCV version, DBV version, model version, and operator ID. This constitutes the per-decision audit record.
+| Article 10 (data governance) · Article 14 (human oversight)
+
+| RCA → Case Management (ACL)
+| The analysis_job_id in every Recommendation links the human-approved action back to the LLM evidence. This is the technical documentation of AI-assisted decision rationale.
+| Article 10 · Article 13 (transparency)
+
+| Model Operations → Inspection
+| The production_lot_id in every ModelArtifact push enables post-hoc traceability of every InspectionCase to the exact model version that produced its Decision.
+| Article 10 · Article 12 (record-keeping)
+
+| Data / Feature → Model Operations
+| The lineage_record_id in every TrainingDataset delivery constitutes the data provenance documentation required for high-risk AI system classification.
+| Article 10 (data governance) · Annex IV (technical documentation)
+|===
+
+=== Context Map — Narrative Summary
+
+The map has a clear centre of gravity: *Case Management* is the integration hub. It receives from Inspection (upstream, Customer-Supplier), triggers RCA (it is upstream to RCA), receives RCA output through a mandatory ACL, and serves as the primary EU AI Act audit boundary. No other context accumulates this many obligations.
+
+The most architecturally significant boundary is *RCA → Case Management*. The Open Host Service plus Anti-Corruption Layer combination is the hardest pattern to implement correctly and the most important for system integrity. If the ACL is bypassed or weakened, raw LLM output enters the Case domain model and the system loses its ability to make the "LLM advisory only" guarantee.
+
+The *DriftSignal* feedback loop (Inspection → Model Operations) is the boundary most at risk of being treated as a command rather than an observation. The Published Language pattern is deliberate — it prevents Model Operations from being tightly coupled to Inspection's internal state while still enabling drift response.
+
+The *Model Operations → Inspection* boundary is the highest-risk deployment boundary. Edge nodes may be offline. The push mechanism must be resilient, and the 48-hour rollback window is non-negotiable for production safety.
+
+=== Open Questions After This Session
+
+[cols="1,6,3", options="header"]
+|===
+| # | Question | Owner
+
+| Q1
+| Should DriftSignal include an environmental_context_flags field once sensor infrastructure is available? Draft schema extension needed.
+| Edge Platform Team · Data Engineering Team
+
+| Q2
+| What is the RCA AnalysisJob SLA? This affects the Case Management timeout for unresolved CauseVocabularyGaps (AC-14).
+| AI Research Team · Product Owner
+
+| Q3
+| Should the ACL cause_category vocabulary be stored in Data / Feature (as a lookup table) or remain embedded in Case Management?
+| Quality Platform Team · Data Engineering Team
+|===
+
+=== Carry-Forward to Step 6: User Story Mapping
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| All 6 relationships named with formal patterns
+| ✅ done
+
+| ACL contract stub documented (RCA → Case Management)
+| ✅ done
+
+| EU AI Act boundaries marked (4 boundaries)
+| ✅ done
+
+| Change ownership agreed per boundary
+| ✅ done
+
+| Narrative summary written
+| ✅ done
+|===
+
+[TIP]
+====
+*Facilitator note for Step 6:* The User Story Map backbone must cover all five phases of the Decision Loop and Learning Loop. The ACL translation step (RCA → Recommendation → Human approval) must appear explicitly on the backbone — it is often invisible in story maps because it crosses team boundaries. Ensure it is placed between the Investigate and Override backbone steps. The EU AI Act audit trail stories belong in the MVP slice, not a later release.
+====

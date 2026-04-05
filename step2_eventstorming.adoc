@@ -1,0 +1,430 @@
+= Step 2: EventStorming
+VQS DDD Workshop · Step 2 of 7
+:doctype: article
+:icons: font
+:source-highlighter: rouge
+:toc: left
+:toc-title: Contents
+:toclevels: 2
+:sectnums:
+:sectnumlevels: 2
+
+// ============================================================
+//  ABOUT THIS DOCUMENT
+// ============================================================
+[.lead]
+This document provides two things for Step 2 of the VQS DDD Workshop:
+
+. A *blank template* for running an EventStorming session (Section 1).
+. A *fully worked example* drawn from the VQS edge-inspection system (Section 2).
+
+Duration: *120 minutes*. +
+Goal: Map the full domain lifecycle on a timeline using colour-coded sticky notes. Surface hotspots. Identify the boundaries of emerging bounded contexts.
+
+=== Sticky Note Legend
+
+[cols="2,3,4", options="header"]
+|===
+| Colour | Type | Rule
+
+| 🟧 Orange | Domain Event | Past tense. A fact that happened. e.g. "DefectDetected"
+| 🟦 Blue | Command | Imperative. An intention that causes an event. e.g. "AssignDecision"
+| 🟨 Yellow | Aggregate | Noun. The thing that handles commands and emits events. e.g. "InspectionCase"
+| 🟩 Green | Policy / Reaction | "Whenever X, then Y." Automation rules and human reactions.
+| 🟥 Red | Hotspot | An unresolved question, conflict, or gap. Park and move on.
+| 🟪 Purple | External System | A system or actor outside your domain boundary.
+|===
+
+''''
+
+// ============================================================
+//  PART I — BLANK TEMPLATE
+// ============================================================
+[[template]]
+== Template (fill during session)
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| ___________________________
+
+| Facilitator
+| ___________________________
+
+| Participants
+| ___________________________
+
+| Input from Step 1
+| Actor list · informal terms · hotspot cards · feedback loops
+|===
+
+=== Phase 1 — Collect Domain Events (Orange)
+
+[NOTE]
+====
+Start here. No commands, no aggregates yet. Ask: "What *happened* in the domain?" Put everything on the wall in rough chronological order. Duplicates are fine — merge later.
+====
+
+[cols="1,4,4", options="header"]
+|===
+| # | Event name (past tense) | Notes / actor who raised it
+
+| E01 | ___ | ___
+| E02 | ___ | ___
+| E03 | ___ | ___
+| E04 | ___ | ___
+| E05 | ___ | ___
+| E06 | ___ | ___
+| E07 | ___ | ___
+| E08 | ___ | ___
+| E09 | ___ | ___
+| E10 | ___ | ___
+| E11 | ___ | ___
+| E12 | ___ | ___
+|===
+
+=== Phase 2 — Add Commands (Blue)
+
+[cols="1,4,4,4", options="header"]
+|===
+| # | Command name (imperative) | Triggered by | Causes event
+
+| C01 | ___ | ___ | ___
+| C02 | ___ | ___ | ___
+| C03 | ___ | ___ | ___
+| C04 | ___ | ___ | ___
+| C05 | ___ | ___ | ___
+| C06 | ___ | ___ | ___
+|===
+
+=== Phase 3 — Identify Aggregates (Yellow)
+
+[cols="1,4,5", options="header"]
+|===
+| # | Aggregate name | Events and commands it handles
+
+| A01 | ___ | ___
+| A02 | ___ | ___
+| A03 | ___ | ___
+| A04 | ___ | ___
+| A05 | ___ | ___
+|===
+
+=== Phase 4 — Mark Policies and Reactions (Green)
+
+[cols="1,8", options="header"]
+|===
+| # | Policy (format: "Whenever [Event], then [Command]")
+
+| P01 | Whenever ___, then ___
+| P02 | Whenever ___, then ___
+| P03 | Whenever ___, then ___
+| P04 | Whenever ___, then ___
+|===
+
+=== Phase 5 — Park Hotspots (Red)
+
+[WARNING]
+====
+Every unresolved question, ownership gap, or contested rule gets a red card. Do NOT debate them now — park and move to Step 3: Example Mapping.
+====
+
+[cols="1,6,3", options="header"]
+|===
+| # | Hotspot description | Priority for Example Mapping
+
+| H1 | ___ | High / Medium / Low
+| H2 | ___ | High / Medium / Low
+| H3 | ___ | High / Medium / Low
+| H4 | ___ | High / Medium / Low
+| H5 | ___ | High / Medium / Low
+| H6 | ___ | High / Medium / Low
+| H7 | ___ | High / Medium / Low
+|===
+
+=== Phase 6 — Identify External Systems (Purple)
+
+[cols="4,6", options="header"]
+|===
+| External system | How it interacts with your domain
+
+| ___ | ___
+| ___ | ___
+| ___ | ___
+|===
+
+=== Phase 7 — Draw Context Boundaries
+
+[NOTE]
+====
+Draw a boundary around events that naturally cluster together. Name the cluster. This is your first view of bounded contexts.
+====
+
+[cols="2,4,4", options="header"]
+|===
+| Proposed context name | Events inside | Key question still open
+
+| ___ | ___ | ___
+| ___ | ___ | ___
+| ___ | ___ | ___
+| ___ | ___ | ___
+| ___ | ___ | ___
+|===
+
+=== Feedback Loops — From Step 1
+
+[cols="5,3,4", options="header"]
+|===
+| Loop description | Status | Where it appears on the timeline
+
+| ___ → ___ | broken / working | Between events ___ and ___
+| ___ → ___ | broken / working | Between events ___ and ___
+| ___ → ___ | broken / working | Between events ___ and ___
+|===
+
+=== Carry-Forward to Step 3: Example Mapping
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| Full event timeline documented | [ ] done
+| Commands linked to events | [ ] done
+| Aggregates identified | [ ] done
+| Policies stated | [ ] done
+| Hotspots captured and prioritised | [ ] done
+| Context clusters named | [ ] done
+|===
+
+''''
+
+// ============================================================
+//  PART II — FILLED EXAMPLE
+// ============================================================
+[[example]]
+== Filled Example — VQS Edge Inspection System
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-07
+
+| Facilitator
+| Dr. N. Golovko
+
+| Participants
+| Petra K. (Quality Engineer) · Sven M. (ML Engineer) · Lukas D. (Data Engineer) · Tim B. (Product Owner)
+
+| Input from Step 1
+| 7 hotspot cards · 8 informal terms · 3 broken feedback loops · 12 concept candidates
+|===
+
+=== Phase 1 — Domain Events (Orange)
+
+[cols="1,4,4", options="header"]
+|===
+| # | Event name | Notes
+
+| E01 | PanelArrivedOnConveyor | Triggered by PLC sensor — external system boundary
+| E02 | FramesCaptured | EV-07 edge node; 4 frames at 2400 dpi
+| E03 | DefectDetected | Confidence 0.91, class SurfaceScratch — key event
+| E04 | DecisionAssigned | SCRAP auto-assigned from DecisionBand lookup (hotspot H3)
+| E05 | HMIAlertFired | Red light + thumbnail at Petra's workstation
+| E06 | OverrideSubmitted | Human correction — NO reason code today (hotspot H4)
+| E07 | DecisionAccepted | Operator acknowledged without override
+| E08 | CaseClosed | InspectionCase finalised — forwarded downstream
+| E09 | InspectionCaseForwarded | Sent to Case Management context
+| E10 | RCARequested | Triggered by Case Management on override pattern (hotspot H1)
+| E11 | RootCauseSuggested | LLM/VLM output — advisory only (hotspot H5)
+| E12 | RecommendationCreated | ACL translation of RootCauseSuggested in Case Management
+| E13 | DriftDetected | 72 h lag from override rate spike to detection (hotspot H2)
+| E14 | RetrainingTriggered | Manual today — ownership unresolved (hotspot H6 and H7)
+| E15 | ModelRetrained | New model version produced
+| E16 | ModelDeployed | New version pushed to EV-07 fleet
+| E17 | CaseOpened | Case Management receives InspectionCase and opens Case
+| E18 | CaseEscalated | When EscalationFlag set (RC-07 used)
+| E19 | RecommendationApproved | Human approval gate — required before action
+| E20 | CaseClosed | Case Management lifecycle complete
+| E21 | DBVCreated | New DecisionBandVersion authored by ML Engineer
+| E22 | ModelDeployed | Model version pinned to production lot
+|===
+
+=== Phase 2 — Commands (Blue)
+
+[cols="1,4,4,4", options="header"]
+|===
+| # | Command | Triggered by | Causes event
+
+| C01 | CaptureFrames | PLC panel-arrival signal | FramesCaptured
+| C02 | RunInference | FramesCaptured event | DefectDetected / no event
+| C03 | LookupDecisionBand | DefectDetected event | DecisionAssigned
+| C04 | TriggerDiverter | DecisionAssigned = SCRAP | PanelDiverted
+| C05 | SubmitOverride | Operator action on HMI | OverrideSubmitted
+| C06 | RequestRCA | OverrideWindow threshold breach | RCARequested
+| C07 | AnalyseDefectPattern | RCARequested event | RootCauseSuggested
+| C08 | CreateRecommendation | ACL translation of RootCauseSuggested | RecommendationCreated
+| C09 | ApproveRecommendation | Case Manager action | RecommendationApproved
+| C10 | TriggerRetraining | DriftDetected + owner decision | RetrainingTriggered
+| C11 | DeployModel | RetrainingJob complete | ModelDeployed
+| C12 | CreateDBV | ML Engineer authorship + Plant Manager approval | DBVCreated
+|===
+
+=== Phase 3 — Aggregates (Yellow)
+
+[cols="1,4,5", options="header"]
+|===
+| # | Aggregate | Events and commands handled
+
+| A01 | InspectionCase | DefectDetected, DecisionAssigned, OverrideSubmitted, DecisionAccepted, CaseClosed, InspectionCaseForwarded
+| A02 | Case | CaseOpened, RCARequested, RecommendationCreated, RecommendationApproved, CaseEscalated, CaseClosed
+| A03 | Override | OverrideSubmitted — contains ReasonCode reference; contributes to OverrideWindow count
+| A04 | ModelVersion | ModelRetrained, ModelDeployed — versioned, pinned to production lot
+| A05 | DecisionBandVersion (DBV) | DBVCreated, DBVApproved, ReviewOverdueAlert — owned by Model Operations
+|===
+
+=== Phase 4 — Policies and Reactions (Green)
+
+[cols="1,8", options="header"]
+|===
+| # | Policy
+
+| P01 | Whenever ≥3 OverrideSubmitted events of the same DefectType with model-error ReasonCategory occur within a rolling 24 h window, then RequestRCA
+| P02 | Whenever RootCauseSuggested arrives at Case Management, then pass through ACL and CreateRecommendation
+| P03 | Whenever DBV review_date passes without renewal, then raise ReviewOverdueAlert to Plant Manager
+| P04 | Whenever DriftDetected fires, then alert ML Engineer (owner of retraining decision — RACI unresolved, hotspot H6)
+|===
+
+=== Phase 5 — Hotspots (Red)
+
+[cols="1,6,3", options="header"]
+|===
+| # | Hotspot description | Priority
+
+| H1
+| When does an Override pattern trigger an RCA request? The team disagrees: any override vs repeated same-type vs only model-error category.
+| High
+
+| H2
+| DriftDetected currently has a 72 h lag (weekly report, manual review). No real-time detection exists.
+| High
+
+| H3
+| DecisionBand thresholds were set at initial deployment 14 months ago. Nobody knows who owns them or when they were last reviewed.
+| High
+
+| H4
+| Override reason codes do not exist. Free-text justification cannot drive retraining or satisfy EU AI Act Article 10 requirements.
+| High (resolve first)
+
+| H5
+| RootCauseHypothesis (raw LLM output) has no Anti-Corruption Layer between RCA and Case Management today. Raw JSON is passed directly.
+| High
+
+| H6
+| Who owns the retraining decision? When DriftDetected fires, no process exists for who evaluates it, approves retraining, and signs off the new model version.
+| High
+
+| H7
+| Model retraining is entirely manual. No automated pipeline, no version management for edge deployments, no rollback mechanism.
+| Medium
+|===
+
+=== Phase 6 — External Systems (Purple)
+
+[cols="4,6", options="header"]
+|===
+| External system | Interaction with domain
+
+| PLC (Programmable Logic Controller)
+| Sends panel-arrival signal; receives diverter trigger command. Upstream of Inspection context.
+
+| HMI Workstation (Petra's terminal)
+| Displays HMI alert and thumbnail; receives override submission. Interface layer of Inspection context — not a separate bounded context.
+
+| ERP / MES (Manufacturing Execution System)
+| Receives quality disposition data (SCRAP / PASS counts) from Case Management. Downstream consumer — Open Host Service boundary.
+|===
+
+=== Phase 7 — Emerging Bounded Contexts
+
+[cols="2,4,4", options="header"]
+|===
+| Context name | Events inside | Key open question
+
+| Inspection (Edge)
+| E01–E09 (detection, decision, override, case closure)
+| Does TemporaryBandOverride live here or in Model Operations?
+
+| RCA (Cloud)
+| E10, E11 (RCA job, hypothesis generation)
+| What is the SLA for AnalysisJob completion?
+
+| Case Management (Cloud)
+| E12, E17–E20 (case lifecycle, recommendation, audit)
+| Does FalseOverride event belong here or in Inspection?
+
+| Model Operations (Cloud)
+| E13–E16, E21–E22 (drift, retrain, deploy, DBV)
+| H6: who owns the retraining decision? (RACI unresolved)
+
+| Data / Feature (Cloud)
+| TrainingDataset, FeatureSchema events (not yet on timeline)
+| Should SyntheticSample generation be its own context?
+|===
+
+=== Feedback Loops — Status on Timeline
+
+[cols="5,3,4", options="header"]
+|===
+| Loop description | Status | Timeline position
+
+| Override (E06) → Drift Detection (E13) — 72 h, manual weekly report
+| ❌ broken
+| Between Inspection and Model Operations contexts
+
+| DriftDetected (E13) → ML Engineer awareness — ad hoc, no alert
+| ❌ broken
+| Within Model Operations context — no automated path
+
+| RCA Report (E11) → Model Recalibration (E14) — no automated trigger, no confirmed owner
+| ❌ broken
+| Between RCA and Model Operations contexts
+|===
+
+=== Carry-Forward to Step 3: Example Mapping
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| 22 domain events documented
+| ✅ done
+
+| 12 commands linked to events
+| ✅ done
+
+| 5 aggregates identified
+| ✅ done
+
+| 4 policies stated
+| ✅ done
+
+| 7 hotspots captured and prioritised
+| ✅ done
+
+| 5 context clusters named
+| ✅ done
+|===
+
+[TIP]
+====
+*Facilitator note for Step 3:* Start Example Mapping with H4 (override reason codes). It is the highest-priority hotspot because it blocks both the EU AI Act compliance requirement and the retraining pipeline input. After H4, tackle H1 (override → RCA trigger) — it produced the most disagreement in the room and directly determines the Case Management aggregate design.
+====

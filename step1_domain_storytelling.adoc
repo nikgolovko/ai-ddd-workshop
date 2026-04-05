@@ -1,0 +1,425 @@
+= Step 1: Domain Storytelling
+VQS DDD Workshop · Step 1 of 7
+:doctype: article
+:icons: font
+:source-highlighter: rouge
+:toc: left
+:toc-title: Contents
+:toclevels: 2
+:sectnums:
+:sectnumlevels: 2
+
+// ============================================================
+//  ABOUT THIS DOCUMENT
+// ============================================================
+[.lead]
+This document provides two things for Step 1 of the VQS DDD Workshop:
+
+. A *blank template* you fill in during the Domain Storytelling session (Section 1).
+. A *fully worked example* drawn from the VQS edge-inspection system (Section 2).
+
+Duration: *90 minutes*. +
+Goal: Capture the real workflow as told by domain experts — no tech jargon, no org charts, one actor at a time.
+
+''''
+
+// ============================================================
+//  PART I — BLANK TEMPLATE
+// ============================================================
+[[template]]
+== Template (fill during session)
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| ___________________________
+
+| Facilitator
+| ___________________________
+
+| Location / Room
+| ___________________________
+
+| Participants
+| ___________________________
+|===
+
+=== Story Header
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Story Title
+| ___ (name it like a story, not a process — use domain expert language)
+
+| Main Actor
+| ___ (one person's perspective per story)
+
+| Supporting Actors / Systems
+| ___ (people, tools, systems that appear in the story)
+|===
+
+NOTE: One story per session. If a second actor has a fundamentally different perspective, run a second story.
+
+=== Story A — Happy Path
+
+[NOTE]
+====
+Write in *past tense*. One sentence per step. No technical jargon. If you catch yourself writing a class name or an API endpoint, rewrite it in the actor's words.
+====
+
+[cols="1,8", options="header"]
+|===
+| Step | What happened
+
+| 1 | ___
+| 2 | ___
+| 3 | ___
+| 4 | ___
+| 5 | ___
+| 6 | ___
+| 7 | ___
+| 8 | ___
+|===
+
+=== Story B — Failure Mode / Edge Case
+
+[WARNING]
+====
+This is the *most valuable part* of the session. Every system has failure modes that domain experts carry in their heads but never write down. Ask: "Tell me about a time it went wrong."
+====
+
+[cols="1,8", options="header"]
+|===
+| Step | What happened
+
+| 1 | ___
+| 2 | ___
+| 3 | ___
+| 4 | ___
+| 5 | ___
+| 6 | ___
+| 7 | ___
+| 8 | ___
+|===
+
+=== Informal Terms Heard
+
+[NOTE]
+====
+Every informal term is a potential domain concept. Collect everything. They become Ubiquitous Language candidates.
+====
+
+[cols="3,7", options="header"]
+|===
+| Term heard | What the expert seems to mean
+
+| "___" | ___
+| "___" | ___
+| "___" | ___
+| "___" | ___
+| "___" | ___
+| "___" | ___
+|===
+
+=== Implicit Decisions Surfaced
+
+[cols="3,7", options="header"]
+|===
+| Actor | Decision made
+
+| ___ | ___
+| ___ | ___
+| ___ | ___
+| ___ | ___
+| ___ | ___
+|===
+
+NOTE: Circle every decision in the story. These become commands or domain events in Step 2.
+
+=== Surprises and Unknowns — Red Hotspots
+
+[WARNING]
+====
+Park everything unresolved here. These become the EventStorming hotspot cards in Step 2.
+====
+
+[cols="1,9", options="header"]
+|===
+| # | Surprise / unknown
+
+| ⚠1 | ___
+| ⚠2 | ___
+| ⚠3 | ___
+| ⚠4 | ___
+| ⚠5 | ___
+|===
+
+=== Feedback Loops Identified
+
+[cols="5,3", options="header"]
+|===
+| Loop description | Status (working / broken / unknown)
+
+| ___ → ___ | ___
+| ___ → ___ | ___
+| ___ → ___ | ___
+|===
+
+=== Domain Concept Candidates
+
+List every term that felt important, even if you cannot define it yet:
+
+___________________________________________________________
+___________________________________________________________
+
+=== Carry-Forward to Step 2: EventStorming
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| Actor list | [ ] done
+| Informal terms collected | [ ] done
+| Hotspot cards written | [ ] done
+| Feedback loops named | [ ] done
+| Domain concept candidates listed | [ ] done
+|===
+
+''''
+
+// ============================================================
+//  PART II — FILLED EXAMPLE
+// ============================================================
+[[example]]
+== Filled Example — VQS Edge Inspection System
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-07
+
+| Facilitator
+| Dr. N. Golovko
+
+| Location / Room
+| Workshop Room B2, Siemens Erlangen
+
+| Participants
+| Petra K. (Quality Engineer) · Sven M. (ML Engineer) · Jana R. (Plant Manager) · Tim B. (Product Owner)
+|===
+
+=== Story Header
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Story Title
+| "Defect on Line 3 at 06:42 — Automated SCRAP"
+
+| Main Actor
+| Petra K. — Quality Engineer, Morning Shift
+
+| Supporting Actors / Systems
+| Edge Node EV-07 · PLC actuator · HMI workstation · Case Management system
+|===
+
+=== Story A — Happy Path
+
+[cols="1,8", options="header"]
+|===
+| Step | What happened
+
+| 1
+| Steel panel #A-4471 arrived on Conveyor 3 at 06:42. Speed 0.4 m/s. Morning shift, normal lighting conditions.
+
+| 2
+| The edge vision node EV-07 captured four overlapping frames at 2400 dpi and ran inference in 140 ms.
+
+| 3
+| A 12 mm linear scratch on the top-left quadrant was detected. Confidence score 0.91. Defect class: SurfaceScratch.
+
+| 4
+| The system looked up the active decision band: confidence above 0.85 maps to Decision = SCRAP. Decision was auto-assigned without human input.
+
+| 5
+| The panel diverter triggered at station 4. A red warning light flashed at Petra's HMI workstation along with a thumbnail of the detected area.
+
+| 6
+| Petra reviewed the thumbnail and agreed with the decision. She logged no override. Duration from alert to acknowledgement: 28 seconds.
+
+| 7
+| InspectionCase #IC-4471 was closed: Decision = SCRAP, Override = none, Operator = Petra K.
+
+| 8
+| The closed case record was forwarded to the Case Management system for archival and downstream RCA eligibility check.
+|===
+
+=== Story B — Failure Mode / Edge Case
+
+[cols="1,8", options="header"]
+|===
+| Step | What happened
+
+| 1
+| Planned maintenance replaced halogen lighting with LED on Line 3 at 14:00 during shift handover. Nobody notified the ML team.
+
+| 2
+| The edge model continued running with calibration trained under halogen spectrum. No mechanism existed to detect an illumination change in the inference pipeline.
+
+| 3
+| The model began flagging 38–42% of panels as SurfaceScratch with confidence scores between 0.86 and 0.89 — just above the SCRAP threshold. All were false positives.
+
+| 4
+| Petra started overriding decisions one by one. She had no structured way to explain why. Each override was logged but never aggregated or reviewed.
+
+| 5
+| On day two Petra raised a verbal complaint with her shift lead. The shift lead assumed it was a bad batch of steel and took no action. No escalation path to the ML team existed.
+
+| 6
+| After three days, Sven (ML Engineer) noticed an anomalous spike in the override rate while reviewing the weekly report. He began investigating manually.
+
+| 7
+| Sven identified the lighting change as the root cause by cross-referencing maintenance logs. He recalibrated the model. False positive rate returned to baseline.
+
+| 8
+| The 340 panels that Petra had passed via override were never systematically reviewed. Her justification notes read "visual check OK" — no structured reason code existed.
+|===
+
+=== Informal Terms Heard
+
+[cols="3,7", options="header"]
+|===
+| Term heard | What the expert seems to mean
+
+| "the blink"
+| The red warning light flash at the HMI when a defect is detected
+
+| "a false"
+| A false positive — operator shorthand for an incorrect SCRAP decision
+
+| "ghost scratch"
+| A scratch the model detects that does not physically exist — often a lighting artefact
+
+| "the override button"
+| The confirmation action on Petra's HMI panel that logs a human correction
+
+| "a bad batch"
+| Shift lead assumption: product quality issue, not a model issue
+
+| "the weekly"
+| The weekly override rate report reviewed by the ML Engineer
+
+| "lighting flip"
+| The informal name for the halogen-to-LED transition event on Line 3
+
+| "drift window"
+| Informal concept: the undetected period between model drift onset and discovery
+|===
+
+=== Implicit Decisions Surfaced
+
+[cols="3,7", options="header"]
+|===
+| Actor | Decision made
+
+| ML model
+| Defect / no-defect classification per frame; confidence score assignment
+
+| System
+| SCRAP / REWORK / PASS from decision band lookup; diverter trigger on SCRAP
+
+| Petra (Quality Engineer)
+| Override or accept the model decision; whether to raise a verbal complaint to the shift lead
+
+| Shift lead
+| Report or suppress the quality engineer's complaint (no formal path existed)
+
+| Sven (ML Engineer)
+| Investigate or dismiss the weekly anomaly; recalibrate model or wait for more data
+|===
+
+=== Surprises and Unknowns — Red Hotspots
+
+[cols="1,9", options="header"]
+|===
+| # | Surprise / unknown
+
+| ⚠1
+| Nobody owns the override log. It exists, but no one is responsible for reviewing it, aggregating patterns, or acting on what it contains.
+
+| ⚠2
+| The model confidence score is never shown to Petra on the HMI. She sees only the Decision (SCRAP / PASS), not the underlying confidence that produced it.
+
+| ⚠3
+| There is no formal escalation path from Quality Engineer to ML Engineer. Drift surfaces only if the ML Engineer happens to notice an anomaly in a weekly report.
+
+| ⚠4
+| Override reason codes do not exist. Petra's justification is free text or verbal. "Visual check OK" cannot drive retraining or satisfy EU AI Act audit requirements.
+
+| ⚠5
+| RCA reports are generated by the cloud LLM system but no one has confirmed they are read, actioned, or linked back to model updates.
+
+| ⚠6
+| Environmental context — lighting, temperature, shift — is not logged alongside inspection data. Model drift caused by environmental change is indistinguishable from model degradation.
+
+| ⚠7
+| The decision band thresholds (confidence → decision class) were set at initial model deployment. Nobody knows who owns them or when they were last reviewed.
+|===
+
+=== Feedback Loops Identified
+
+[cols="5,3", options="header"]
+|===
+| Loop description | Status
+
+| Override → Drift Detection (72 h delay via weekly report, manual only)
+| ❌ broken
+
+| DriftDetected → ML Engineer awareness (ad hoc, no automated alert)
+| ❌ broken
+
+| RCA report → Model recalibration (no automated path, no confirmed owner)
+| ❌ broken
+|===
+
+=== Domain Concept Candidates
+
+InspectionCase · Defect · Decision · DecisionBand · ConfidenceScore · Override · DriftSignal · ModelVersion · EscalationPath · ReasonCode · ShiftContext · RCAReport
+
+=== Carry-Forward to Step 2: EventStorming
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| Actor list (5 actors identified)
+| ✅ done
+
+| Informal terms collected (8 terms)
+| ✅ done
+
+| Hotspot cards written (7 hotspots)
+| ✅ done
+
+| Feedback loops named (3 loops, all broken)
+| ✅ done
+
+| Domain concept candidates listed (12 candidates)
+| ✅ done
+|===
+
+[TIP]
+====
+*Facilitator note for Step 2:* Open the EventStorming session with Story B. Place ⚠4 (reason codes) and ⚠1 (override log ownership) as the first red hotspot cards on the timeline. These are the highest-priority items to resolve in Step 3: Example Mapping.
+====

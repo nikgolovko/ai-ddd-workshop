@@ -1,0 +1,753 @@
+= Step 3: Example Mapping
+VQS DDD Workshop · Step 3 of 7
+:doctype: article
+:icons: font
+:source-highlighter: rouge
+:toc: left
+:toc-title: Contents
+:toclevels: 2
+:sectnums:
+:sectnumlevels: 2
+
+// ============================================================
+//  ABOUT THIS DOCUMENT
+// ============================================================
+[.lead]
+This document provides two things for Step 3 of the VQS DDD Workshop:
+
+. A *blank template* for running an Example Mapping session (Section 1).
+. A *fully worked example* covering 4 hotspots from the VQS system (Section 2).
+
+Duration: *60 minutes* (15 min per rule). +
+Goal: Resolve ambiguity in contested rules using concrete examples. One rule per session. Pick the hottest hotspot from EventStorming.
+
+=== Card Colour Reference
+
+[cols="2,3,5", options="header"]
+|===
+| Colour | Type | Rule
+
+| 🟨 Yellow | Rule | The business rule under examination. One rule card per session.
+| 🟩 Green | Example ✓ | A concrete Given/Then scenario that confirms the rule holds.
+| 🟩 Green (striped) | Counter-example ✗ | A scenario that breaks or reveals a gap in the rule.
+| 🟥 Red | Question ? | An unresolved question. Park it — do not debate.
+| 🟦 Blue | New concept | A domain term discovered during mapping that did not exist before.
+| 🟧 Orange | Acceptance criterion | A testable statement derived from the agreed rule.
+|===
+
+''''
+
+// ============================================================
+//  PART I — BLANK TEMPLATE
+// ============================================================
+[[template]]
+== Template (one copy per rule session)
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| ___________________________
+
+| Rule session number
+| Session ___ of ___
+
+| Hotspot addressed
+| H___ from EventStorming
+
+| Participants
+| ___________________________
+|===
+
+=== The Rule (Yellow Card)
+
+[NOTE]
+====
+State the rule as precisely as possible before the session starts. You will refine it as examples expose ambiguity. One rule per session — do not mix.
+====
+
+____
+*Rule under examination:*
+
+___________________________________________________________
+___________________________________________________________
+___________________________________________________________
+
+*Source:* EventStorming hotspot H___ · Raised by: ___
+____
+
+=== Confirming Examples (Green Cards ✓)
+
+[NOTE]
+====
+Concrete scenarios in Given / Then format. The rule must hold for all of them. If it does not, refine the rule or add a condition.
+====
+
+==== Example 1
+
+*Given:* ___________________________________________________________
+
+*Then:* ___________________________________________________________
+
+*Status:* [ ] Confirms rule  [ ] Reveals gap — rule needs refinement
+
+==== Example 2
+
+*Given:* ___________________________________________________________
+
+*Then:* ___________________________________________________________
+
+*Status:* [ ] Confirms rule  [ ] Reveals gap — rule needs refinement
+
+==== Example 3
+
+*Given:* ___________________________________________________________
+
+*Then:* ___________________________________________________________
+
+*Status:* [ ] Confirms rule  [ ] Reveals gap — rule needs refinement
+
+=== Counter-Examples (Green Striped Cards ✗)
+
+[NOTE]
+====
+Scenarios where the rule does NOT hold, or where its boundary is ambiguous. Counter-examples are the most valuable output — they reveal what the rule does not cover.
+====
+
+==== Counter-Example 1
+
+*Given:* ___________________________________________________________
+
+*Then (expected):* ___________________________________________________________
+
+*Ambiguity exposed:* ___________________________________________________________
+
+==== Counter-Example 2
+
+*Given:* ___________________________________________________________
+
+*Then (expected):* ___________________________________________________________
+
+*Ambiguity exposed:* ___________________________________________________________
+
+=== Open Questions (Red Cards ?)
+
+[cols="1,8", options="header"]
+|===
+| # | Question (unresolved — carry to backlog or next session)
+
+| Q1 | ___
+| Q2 | ___
+| Q3 | ___
+| Q4 | ___
+|===
+
+=== New Concepts Discovered (Blue Cards)
+
+[cols="3,5,3", options="header"]
+|===
+| Term | Definition | Context ownership
+
+| ___ | ___ | ___
+| ___ | ___ | ___
+| ___ | ___ | ___
+|===
+
+=== Acceptance Criteria Derived (Orange Cards)
+
+[cols="1,8,2", options="header"]
+|===
+| ID | Acceptance criterion (testable statement) | Status
+
+| AC-__ | ___ | agreed / pending
+| AC-__ | ___ | agreed / pending
+| AC-__ | ___ | agreed / pending
+| AC-__ | ___ | agreed / pending
+|===
+
+=== Rule — Final Agreed Statement
+
+____
+*Refined rule after session:*
+
+___________________________________________________________
+___________________________________________________________
+___________________________________________________________
+____
+
+=== Carry-Forward to Step 4: Bounded Context Canvas
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| Rule agreed and stated precisely | [ ] done
+| Acceptance criteria written | [ ] done
+| New concepts added to glossary | [ ] done
+| Open questions logged as backlog items | [ ] done
+| Boundary decisions noted for canvas | [ ] done
+|===
+
+''''
+
+// ============================================================
+//  PART II — FILLED EXAMPLE
+// ============================================================
+[[example]]
+== Filled Example — VQS Edge Inspection System (4 Rule Sessions)
+
+// ── SESSION 1 ─────────────────────────────────────────────────────────────────
+[[session-h4]]
+=== Session 1 — H4: Override Reason Codes
+
+==== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-07
+
+| Rule session number
+| Session 1 of 4
+
+| Hotspot addressed
+| H4 — Override reason codes do not exist
+
+| Participants
+| Petra K. (Quality Engineer) · Tim B. (Product Owner) · Sven M. (ML Engineer)
+|===
+
+==== The Rule
+
+____
+*Rule under examination:*
+
+When a Quality Engineer submits an Override, they MUST select a reason code from a controlled vocabulary. Free-text justification is NOT accepted. The system must reject Override submission attempts that carry no reason code.
+
+*Source:* EventStorming hotspot H4 · Raised by: Petra K.
+____
+
+==== Confirming Examples ✓
+
+===== Example 1
+*Given:* Petra submits an Override with reason code RC-03 ('environmental artefact — lighting').
+
+*Then:* The Override is accepted. An AuditEntry is created containing the structured reason code. Case Management stores RC-03 and counts it toward the OverrideWindow for that DefectType.
+
+*Status:* ✅ Confirms rule
+
+===== Example 2
+*Given:* Petra submits an Override with reason code RC-01 ('material surface variation — within spec').
+
+*Then:* The Override is accepted. The reason code is logged. Because RC-01 is in the material-variation ReasonCategory, it does NOT count toward the RCA trigger threshold.
+
+*Status:* ✅ Confirms rule — also clarifies ReasonCategory distinction (new concept)
+
+===== Example 3
+*Given:* Petra attempts to submit an Override with no reason code selected.
+
+*Then:* The HMI shows a validation error: "Reason code required." The Override is not recorded until a code is selected.
+
+*Status:* ✅ Confirms rule
+
+==== Counter-Examples ✗
+
+===== Counter-Example 1
+*Given:* Petra selects RC-07 ('other') and adds a free-text note: "looks fine to me."
+
+*Then (expected):* Override accepted but flagged.
+
+*Ambiguity exposed:* Is RC-07 ('other') acceptable? The team agreed: RC-07 is allowed only with mandatory free-text of minimum 10 characters AND sets an EscalationFlag on the Case. This introduced the concept of EscalationFlag, which did not exist before.
+
+===== Counter-Example 2
+*Given:* Petra selects RC-03 but the override later proves incorrect — the defect was real.
+
+*Then (expected):* The incorrect override is not rewritten. The original AuditEntry stands.
+
+*Ambiguity exposed:* An incorrect override creates a FalseOverride event for model feedback. This concept did not exist — discovered here.
+
+==== Open Questions
+
+[cols="1,8", options="header"]
+|===
+| # | Question
+
+| Q1
+| Can Quality Engineers propose new reason codes in the field, or must all changes go through a formal governance process? (Unresolved — carry to backlog.)
+|===
+
+==== New Concepts Discovered
+
+[cols="3,5,3", options="header"]
+|===
+| Term | Definition | Context
+
+| ReasonCode
+| A structured identifier from the active ReasonCodeVocabulary version. Required to submit any Override.
+| Inspection · Case Management
+
+| ReasonCodeVocabulary (RCV)
+| The versioned set of valid ReasonCodes. Owned by Case Management. Reviewed quarterly. Current: RCV-1 (6 codes).
+| Case Management
+
+| ReasonCategory
+| Classification grouping: model-error (RC-03, RC-04, RC-05) counts toward RCA trigger. Material-variation (RC-01, RC-02) does not.
+| Case Management
+
+| EscalationFlag
+| Set on Cases where RC-07 ('other') was used. Triggers mandatory supervisor review.
+| Case Management
+
+| FalseOverride
+| An override later found to be incorrect — creates a feedback event for model training.
+| Case Management (discovered via RCA)
+|===
+
+==== Acceptance Criteria
+
+[cols="1,8,2", options="header"]
+|===
+| ID | Acceptance criterion | Status
+
+| AC-01
+| Override cannot be submitted without a ReasonCode selected from the active RCV version. HMI enforces this at submission time.
+| agreed
+
+| AC-02
+| ReasonCode RC-07 ('other') requires a mandatory free-text note (minimum 10 characters) and sets EscalationFlag on the Case.
+| agreed
+
+| AC-03
+| Every AuditEntry for an Override includes: operator ID, timestamp, ReasonCode, RCV version, and InspectionCase ID.
+| agreed
+
+| AC-04
+| The system records which RCV version was active at the time of each Override.
+| agreed
+|===
+
+==== Rule — Final Agreed Statement
+
+____
+*Refined rule:*
+
+An Override requires a ReasonCode from the current ReasonCodeVocabulary version. Free text alone is not accepted. RC-07 ('other') is permitted only with mandatory free-text and sets an EscalationFlag. All Override submissions create an immutable AuditEntry. The system must enforce this at the HMI layer.
+____
+
+// ── SESSION 2 ─────────────────────────────────────────────────────────────────
+[[session-h1]]
+=== Session 2 — H1: Override Pattern → RCA Trigger
+
+==== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-07
+
+| Rule session number
+| Session 2 of 4
+
+| Hotspot addressed
+| H1 — When does an Override pattern trigger an RCA request?
+
+| Participants
+| Petra K. (Quality Engineer) · Tim B. (Product Owner) · Sven M. (ML Engineer) · Lukas D. (Data Engineer)
+|===
+
+==== The Rule
+
+____
+*Rule under examination:*
+
+An RCA is automatically requested when three or more Overrides of the same DefectType, each carrying a ReasonCode in the model-error ReasonCategory (RC-03, RC-04, or RC-05), occur within a rolling 24-hour OverrideWindow.
+
+*Source:* EventStorming hotspot H1 · This rule did not exist before the session. It took 35 minutes to reach agreement.
+____
+
+==== Confirming Examples ✓
+
+===== Example 1
+*Given:* Four Overrides of DefectType 'SurfaceScratch' with RC-03 occur within six hours.
+
+*Then:* The OverrideWindow threshold is breached. An RCARequested event fires. Case Management opens an RCA job asynchronously. Inspection continues operating without interruption.
+
+*Status:* ✅ Confirms rule
+
+===== Example 2
+*Given:* Three Overrides of DefectType 'SurfaceScratch' with RC-03 spanning exactly 23 hours 59 minutes.
+
+*Then:* Still within the rolling 24 h window. RCARequested fires. Boundary case confirmed — rolling window, not shift-aligned.
+
+*Status:* ✅ Confirms rule — rolling window confirmed
+
+===== Example 3
+*Given:* Three Overrides of 'SurfaceScratch' with RC-03 plus two Overrides of 'EdgeChip' with RC-03 within six hours.
+
+*Then:* Only the SurfaceScratch threshold is breached (three). EdgeChip is not breached (two). One RCARequested fires for SurfaceScratch only. The two DefectTypes are independent.
+
+*Status:* ✅ Confirms rule — per-DefectType independence confirmed
+
+==== Counter-Examples ✗
+
+===== Counter-Example 1
+*Given:* Five Overrides of 'SurfaceScratch' with RC-01 ('material surface variation') within one hour.
+
+*Then (expected):* No RCA triggered.
+
+*Ambiguity exposed:* RC-01 is in the material-variation ReasonCategory, not model-error. Material variation is expected — it is not a model drift signal. The trigger is DefectType + ReasonCategory, not raw Override count. This is the most important distinction in the rule.
+
+===== Counter-Example 2
+*Given:* Three Overrides of 'SurfaceScratch' with RC-03, each from a different operator across three shifts.
+
+*Then (expected):* RCA is still triggered. Operator identity is irrelevant to model drift detection.
+
+*Ambiguity exposed:* The trigger is the DefectType + ReasonCategory combination, independent of who submitted the override.
+
+===== Counter-Example 3
+*Given:* Three Overrides of 'SurfaceScratch' with RC-03, but the ConfidenceScore on each flagged defect was 0.72 — below the active DecisionBand lower threshold.
+
+*Then (expected):* Ambiguous — the team disagreed. Below-band detections may indicate a different problem than above-band ones.
+
+*Ambiguity exposed:* Should low-confidence decisions have a separate, lower override threshold for RCA? Parked as Q3.
+
+==== Open Questions
+
+[cols="1,8", options="header"]
+|===
+| # | Question
+
+| Q1
+| What happens when an RCA job is already open for a DefectType and the threshold is breached again? Append evidence to existing job, or open a new one? (AC-08 — pending.)
+
+| Q2
+| Should low-confidence decisions (below DecisionBand lower threshold) have a separate, lower override count threshold for RCA? (Parked — carry to Step 4.)
+|===
+
+==== New Concepts Discovered
+
+[cols="3,5,3", options="header"]
+|===
+| Term | Definition | Context
+
+| OverrideWindow
+| A rolling 24-hour window per DefectType counting model-error ReasonCategory Overrides toward the RCA escalation threshold. Not shift-aligned.
+| Case Management
+
+| ReasonCategory
+| (Confirmed from Session 1) Classification: model-error (RC-03–05) triggers RCA; material-variation (RC-01–02) does not.
+| Case Management
+|===
+
+==== Acceptance Criteria
+
+[cols="1,8,2", options="header"]
+|===
+| ID | Acceptance criterion | Status
+
+| AC-05
+| RCARequested fires when three or more Overrides of the same DefectType with a model-error ReasonCategory occur within a rolling 24 h OverrideWindow.
+| agreed
+
+| AC-06
+| OverrideWindow is rolling (not shift-aligned). The window resets per DefectType independently.
+| agreed
+
+| AC-07
+| ReasonCodes RC-01 and RC-02 do NOT count toward the RCA trigger threshold.
+| agreed
+
+| AC-08
+| If an RCA job is already open for a DefectType, a new threshold breach does not open a duplicate. It appends evidence to the existing job.
+| pending — Q1 not fully resolved
+|===
+
+==== Rule — Final Agreed Statement
+
+____
+*Refined rule:*
+
+RCARequested fires when three or more Overrides of the same DefectType, each with a ReasonCode in the model-error category (RC-03, RC-04, or RC-05), occur within a rolling 24-hour OverrideWindow. The trigger is per-DefectType. Operator identity and ConfidenceScore level are not factors. Material-variation ReasonCodes do not count.
+____
+
+// ── SESSION 3 ─────────────────────────────────────────────────────────────────
+[[session-h3]]
+=== Session 3 — H3: DecisionBand Governance
+
+==== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-07
+
+| Rule session number
+| Session 3 of 4
+
+| Hotspot addressed
+| H3 — DecisionBand thresholds have no owner, version, or review cadence
+
+| Participants
+| Sven M. (ML Engineer) · Jana R. (Plant Manager) · Tim B. (Product Owner)
+|===
+
+==== The Rule
+
+____
+*Rule under examination:*
+
+Every active DecisionBand must carry a version identifier (DBV-N), a named owner role, an approval record, and a review date. Applying an unversioned DecisionBand to a production InspectionCase is a compliance violation.
+____
+
+==== Confirming Examples ✓
+
+===== Example 1
+*Given:* Sven authors DecisionBandVersion DBV-4 and Jana approves it. DBV-4 carries review_date 2026-10-01.
+
+*Then:* DBV-4 is valid. All InspectionCases can reference it. The audit trail records DBV-4 as the active band. Compliance obligation met.
+
+*Status:* ✅ Confirms rule
+
+===== Example 2
+*Given:* The review_date for DBV-3 passes without a renewal action.
+
+*Then:* DBV-3 enters review-overdue state. The system raises a ReviewOverdueAlert to the Plant Manager. InspectionCases continue to process but carry an overdue flag in their AuditEntry.
+
+*Status:* ✅ Confirms rule — processing continues but alert fires
+
+==== Counter-Examples ✗
+
+===== Counter-Example 1
+*Given:* Petra attempts to adjust DecisionBand thresholds directly via the HMI to reduce false positives during a lighting event.
+
+*Then (expected):* Not permitted. The HMI does not expose threshold editing. DecisionBand modifications require ML Engineer authorship and Plant Manager approval.
+
+*Ambiguity exposed:* A mechanism is needed for emergency threshold adjustment without going through the full governance process. This introduced the concept of TemporaryBandOverride — an emergency, time-limited adjustment requiring the same approvals but bypassing the formal versioning cycle.
+
+==== Open Questions
+
+[cols="1,8", options="header"]
+|===
+| # | Question
+
+| Q1
+| Should TemporaryBandOverride produce its own versioned DBV entry, or is it logged as a runtime override referencing the current DBV?
+|===
+
+==== New Concepts Discovered
+
+[cols="3,5,3", options="header"]
+|===
+| Term | Definition | Context
+
+| DecisionBandVersion (DBV)
+| A versioned, named snapshot of DecisionBand thresholds. Requires owner role, approval record, and review date. Unversioned bands are invalid in production.
+| Inspection · Model Operations
+
+| TemporaryBandOverride
+| An emergency, time-limited adjustment to inference decision thresholds. Requires the same ML Engineer + Plant Manager approval as a DBV but bypasses the full versioning cycle. The HMI does not expose this.
+| Inspection · Model Operations
+
+| ReviewOverdueAlert
+| A domain event raised when a DBV passes its review_date without renewal. Sent to Plant Manager. Cases continue processing but carry an overdue flag.
+| Model Operations
+|===
+
+==== Acceptance Criteria
+
+[cols="1,8,2", options="header"]
+|===
+| ID | Acceptance criterion | Status
+
+| AC-09
+| Every InspectionCase must reference a named, versioned DecisionBandVersion. Cases with unversioned bands are rejected at intake.
+| agreed
+
+| AC-10
+| When a DBV review_date passes, the system raises ReviewOverdueAlert to the Plant Manager. Cases continue to process but carry an overdue flag in their AuditEntry.
+| agreed
+
+| AC-11
+| DecisionBand threshold editing is not exposed on the HMI. Modifications require ML Engineer authorship and Plant Manager approval before taking effect.
+| agreed
+|===
+
+==== Rule — Final Agreed Statement
+
+____
+*Refined rule:*
+
+Every DecisionBand used in production must be versioned as a DecisionBandVersion (DBV-N), approved by ML Engineer + Plant Manager, and carry a review date. The HMI does not expose threshold editing. Emergency adjustments use the TemporaryBandOverride path, which requires the same approvals. Overdue DBVs generate a ReviewOverdueAlert but do not halt processing.
+____
+
+// ── SESSION 4 ─────────────────────────────────────────────────────────────────
+[[session-h5]]
+=== Session 4 — H5: RCA Output Anti-Corruption Layer
+
+==== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-07
+
+| Rule session number
+| Session 4 of 4
+
+| Hotspot addressed
+| H5 — No Anti-Corruption Layer between RCA and Case Management
+
+| Participants
+| Sven M. (ML Engineer) · Tim B. (Product Owner) · Dev Lead (Architecture)
+|===
+
+==== The Rule
+
+____
+*Rule under examination:*
+
+A RootCauseHypothesis (raw LLM output from the RCA context) must NEVER be stored or displayed directly in Case Management. The ACL inside Case Management translates it into a Recommendation containing a validated cause_category, a ConfidenceBucket (High / Medium / Low), and a mandatory human approval gate before any action is taken.
+____
+
+==== Confirming Examples ✓
+
+===== Example 1
+*Given:* RCA returns: hypothesis = 'Halogen-to-LED spectral shift', llm_confidence = 0.83, evidence_refs = ['image_batch_47', 'override_log_day3'].
+
+*Then:* The ACL maps cause_category = 'EnvironmentalChange', ConfidenceBucket = 'High' (≥ 0.80). A Recommendation is created with status = pending_approval. The Case Manager sees the Recommendation only — never the raw LLM output.
+
+*Status:* ✅ Confirms rule
+
+===== Example 2
+*Given:* RCA returns: hypothesis = 'Unknown pattern correlation', llm_confidence = 0.41.
+
+*Then:* ACL maps ConfidenceBucket = 'Low' (< 0.50). Recommendation created with status = low_confidence_review. The Case Manager sees a flag: "Low confidence — manual investigation recommended."
+
+*Status:* ✅ Confirms rule — Low bucket correctly flagged
+
+==== Counter-Examples ✗
+
+===== Counter-Example 1
+*Given:* RCA returns a hypothesis that does not map to any known cause_category in the ACL vocabulary.
+
+*Then (expected):* ACL rejects the mapping. Recommendation created with cause_category = 'unclassified'. A CauseVocabularyGap event fires. The Product Owner is notified to extend the vocabulary before the Recommendation can be actioned.
+
+*Ambiguity exposed:* The CauseVocabularyGap concept did not exist before. The ACL must handle unmappable hypotheses gracefully without losing the evidence.
+
+==== Open Questions
+
+[cols="1,8", options="header"]
+|===
+| # | Question
+
+| Q1
+| What is the SLA for Case Manager review and approval of a Recommendation? (Unresolved — AC-14 pending.)
+
+| Q2
+| Who owns the ACL cause_category vocabulary — Product Owner, ML Engineer, or Quality Engineer?
+
+| Q3
+| Can CauseVocabularyGap route directly to Product Owner tooling or must it route through Case Management?
+|===
+
+==== New Concepts Discovered
+
+[cols="3,5,3", options="header"]
+|===
+| Term | Definition | Context
+
+| ConfidenceBucket
+| An ACL-assigned categorical label derived from LLMConfidence. High ≥ 0.80, Medium 0.50–0.79, Low < 0.50. Replaces raw float in Case Management domain.
+| Case Management (ACL layer)
+
+| CauseVocabularyGap
+| A domain event raised by the ACL when a RootCauseHypothesis cannot be mapped to any existing cause_category. Holds the Recommendation in 'unclassified' state.
+| Case Management (ACL layer)
+|===
+
+==== Acceptance Criteria
+
+[cols="1,8,2", options="header"]
+|===
+| ID | Acceptance criterion | Status
+
+| AC-12
+| Case Management stores only Recommendation objects. RootCauseHypothesis (raw LLM output) is never persisted in the Case Management domain model.
+| agreed
+
+| AC-13
+| The ACL maps LLMConfidence to ConfidenceBucket: High ≥ 0.80, Medium 0.50–0.79, Low < 0.50. Low-bucket Recommendations are flagged for manual review.
+| agreed
+
+| AC-14
+| When the ACL cannot map a hypothesis to a cause_category, a CauseVocabularyGap event is raised and the Recommendation is held in 'unclassified' state until the Product Owner resolves it.
+| pending — SLA not yet agreed
+|===
+
+==== Rule — Final Agreed Statement
+
+____
+*Refined rule:*
+
+The ACL inside Case Management is the only boundary through which RCA output enters Case Management. Raw LLM output is never stored. Every RootCauseHypothesis is translated to a Recommendation with a cause_category and ConfidenceBucket. Unmappable hypotheses produce a CauseVocabularyGap event and hold the Recommendation in unclassified state. Human approval is required before any Recommendation is actioned.
+____
+
+// ── CROSS-SESSION SUMMARY ────────────────────────────────────────────────────
+[[summary]]
+=== Cross-Session Summary
+
+==== All New Concepts Discovered (8 terms — add to Ubiquitous Language before Step 4)
+
+[cols="3,5,3", options="header"]
+|===
+| Term | Definition | Context
+
+| ReasonCode | Structured code from active RCV. Required for Override submission. | Inspection · Case Management
+| ReasonCodeVocabulary (RCV) | Versioned set of valid ReasonCodes. Owned by Case Management. | Case Management
+| ReasonCategory | model-error (RC-03–05) vs material-variation (RC-01–02). Determines RCA trigger. | Case Management
+| OverrideWindow | Rolling 24 h window per DefectType counting model-error overrides. | Case Management
+| DecisionBandVersion (DBV) | Versioned, approved DecisionBand configuration. Owned by Model Operations. | Inspection · Model Operations
+| TemporaryBandOverride | Emergency time-limited threshold adjustment. Same approvals as DBV. | Inspection · Model Operations
+| ConfidenceBucket | ACL-mapped categorical confidence: High / Medium / Low. | Case Management (ACL)
+| CauseVocabularyGap | Event raised when ACL cannot map a hypothesis to a cause_category. | Case Management (ACL)
+|===
+
+==== All Acceptance Criteria (14 total — 12 agreed, 2 pending)
+
+[cols="1,7,2", options="header"]
+|===
+| ID | Criterion | Status
+
+| AC-01 | Override cannot be submitted without a ReasonCode from active RCV. | agreed
+| AC-02 | RC-07 ('other') requires mandatory free-text and sets EscalationFlag. | agreed
+| AC-03 | Every Override AuditEntry includes operator ID, timestamp, ReasonCode, RCV version, InspectionCase ID. | agreed
+| AC-04 | System records which RCV version was active at time of each Override. | agreed
+| AC-05 | RCARequested fires on ≥3 model-error overrides of same DefectType within rolling 24 h. | agreed
+| AC-06 | OverrideWindow is rolling, not shift-aligned. Resets per DefectType. | agreed
+| AC-07 | RC-01 and RC-02 do not count toward RCA trigger threshold. | agreed
+| AC-08 | Duplicate RCA job: new threshold breach appends evidence to existing open job. | pending
+| AC-09 | Every InspectionCase references a named, versioned DBV. Unversioned bands rejected. | agreed
+| AC-10 | DBV review_date expiry raises ReviewOverdueAlert. Cases continue with overdue flag. | agreed
+| AC-11 | DBV editing not exposed on HMI. Requires ML Engineer + Plant Manager approval. | agreed
+| AC-12 | Case Management never persists raw LLM output. Recommendation objects only. | agreed
+| AC-13 | ACL maps LLMConfidence to ConfidenceBucket: High ≥0.80, Medium 0.50–0.79, Low <0.50. | agreed
+| AC-14 | Unmappable hypothesis raises CauseVocabularyGap. Recommendation held in unclassified state. | pending
+|===
+
+[TIP]
+====
+*Facilitator note for Step 4:* AC-08 and AC-14 are the two pending criteria. They affect the Case Management aggregate design and must be resolved before finalising the Case Management bounded context canvas. Assign to Product Owner. Do not design the Case aggregate state machine until these are agreed.
+
+*Boundary decisions ready for canvas:* ReasonCode lives in both Inspection (capture) and Case Management (storage and analysis). ACL lives inside Case Management, not RCA. DecisionBandVersion is owned by Model Operations, referenced by Inspection. ConfidenceBucket is a Case Management term — never appears in RCA or Inspection.
+====

@@ -1,0 +1,1063 @@
+= Step 4: Bounded Context Canvas
+VQS DDD Workshop · Step 4 of 7
+:doctype: article
+:icons: font
+:source-highlighter: rouge
+:toc: left
+:toc-title: Contents
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 3
+
+// ============================================================
+//  ABOUT THIS DOCUMENT
+// ============================================================
+[.lead]
+This document provides two things for Step 4 of the VQS DDD Workshop:
+
+. A *blank canvas template* for a single bounded context (Section 1). Copy once per context.
+. *Five fully worked canvases* for the VQS system (Section 2).
+
+Duration: *90 minutes* total · ~18 minutes per canvas. +
+Goal: Define the explicit boundaries, responsibilities, language, and team ownership of each bounded context. Start with the Core Domain.
+
+=== Strategic Classification Reference
+
+[cols="2,8", options="header"]
+|===
+| Classification | Meaning
+
+| Core Domain
+| Your primary competitive differentiator. Build in-house, invest deeply, protect from external coupling.
+
+| Supporting Subdomain
+| Necessary for the core to function but not differentiating. Build in-house but invest proportionally.
+
+| Generic Subdomain
+| Commodity capability. Consider buying, reusing, or using open-source before building.
+|===
+
+=== Integration Pattern Reference
+
+[cols="2,8", options="header"]
+|===
+| Pattern | Meaning
+
+| Customer-Supplier (C-S)
+| Upstream produces, downstream consumes. Upstream may dictate the contract.
+
+| Anti-Corruption Layer (ACL)
+| Downstream translates upstream output into its own domain model. Upstream is untrusted.
+
+| Open Host Service (OHS)
+| Upstream publishes a stable, versioned API for multiple consumers.
+
+| Published Language (PL)
+| Agreed event schema shared across contexts. Loose coupling.
+
+| Conformist
+| Downstream adopts upstream's model without translation. High coupling — use sparingly.
+
+| Partnership
+| Two teams coordinate in lockstep. High coupling — use only when context boundaries are provisional.
+|===
+
+''''
+
+// ============================================================
+//  PART I — BLANK TEMPLATE (one copy per context)
+// ============================================================
+[[template]]
+== Template — Single Bounded Context Canvas
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| ___________________________
+
+| Context being canvassed
+| ___________________________
+
+| Canvas number
+| ___ of ___
+
+| Participants
+| ___________________________
+|===
+
+=== Context Identity
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Context Name
+| ___ (name from domain perspective — not the tech stack)
+
+| Strategic Classification
+| Core Domain / Supporting Subdomain / Generic Subdomain
+
+| Loop
+| Decision Loop / Learning Loop / Both
+
+| Team Ownership
+| ___ (one team per context — ambiguity here is a structural problem)
+
+| Team Topology Type
+| Stream-aligned / Platform / Enabling / Complicated Subsystem
+|===
+
+=== Purpose / Mission
+
+[NOTE]
+====
+One sentence. If you need two sentences, the context may need splitting.
+====
+
+____
+___________________________________________________________
+___________________________________________________________
+____
+
+=== Key Capabilities
+
+[NOTE]
+====
+What does this context DO? State capabilities, not features.
+====
+
+[cols="1,8", options="header"]
+|===
+| # | Capability
+
+| 01 | ___
+| 02 | ___
+| 03 | ___
+| 04 | ___
+| 05 | ___
+| 06 | ___
+|===
+
+=== Ubiquitous Language (this context only)
+
+[NOTE]
+====
+Terms used HERE. The same word may mean something different in another context — that is correct. Flag cross-context homonyms explicitly.
+====
+
+[cols="3,6,3", options="header"]
+|===
+| Term | Definition within this context | Notes
+
+| ___ | ___ | [ ] new from Step 3
+| ___ | ___ | [ ] new from Step 3
+| ___ | ___ | [ ] new from Step 3
+| ___ | ___ | [ ] new from Step 3
+| ___ | ___ | [ ] new from Step 3
+| ___ | ___ | [ ] new from Step 3
+|===
+
+=== Inbound Dependencies (Upstream)
+
+[cols="3,3,3,4", options="header"]
+|===
+| From context | Pattern | Contract / schema | Notes
+
+| ___ | ___ | ___ | ___
+| ___ | ___ | ___ | ___
+|===
+
+=== Outbound Dependencies (Downstream)
+
+[cols="3,3,3,4", options="header"]
+|===
+| To context | Pattern | Contract / schema | Notes
+
+| ___ | ___ | ___ | ___
+| ___ | ___ | ___ | ___
+|===
+
+=== Domain Events Owned by This Context
+
+___________________________________________________________
+
+=== EU AI Act Obligations (if applicable)
+
+[cols="1,8", options="header"]
+|===
+| # | Obligation
+
+| ⚖1 | ___
+| ⚖2 | ___
+|===
+
+=== Open Questions
+
+[cols="1,3,7", options="header"]
+|===
+| # | Status | Question
+
+| Q1 | open / resolved | ___
+| Q2 | open / resolved | ___
+| Q3 | open / resolved | ___
+|===
+
+''''
+
+// ============================================================
+//  PART II — FIVE FILLED CANVASES
+// ============================================================
+[[canvases]]
+== Filled Canvases — VQS Edge Inspection System
+
+=== Dependency Map Overview
+
+Before the individual canvases, this table shows all six integration boundaries at a glance.
+
+[cols="2,2,2,2,2,2", options="header"]
+|===
+| FROM → TO | Inspection | RCA | Case Management | Model Ops | Data / Feature
+
+| *Inspection*
+| —
+| DriftSignal (PL)
+| InspectionCase (C-S)
+| DriftSignal (PL)
+| —
+
+| *RCA*
+| —
+| —
+| RootCauseHyp (OHS → ACL)
+| —
+| DefectPattern (PL)
+
+| *Case Management*
+| —
+| RCARequested (C-S)
+| —
+| —
+| —
+
+| *Model Operations*
+| ModelArtifact + DBV (C-S)
+| —
+| —
+| —
+| RetrainingReq (C-S)
+
+| *Data / Feature*
+| FeatureSchema (PL)
+| DefectPattern (PL)
+| —
+| TrainingDataset (C-S)
+| —
+|===
+
+PL = Published Language · C-S = Customer-Supplier · OHS = Open Host Service · ACL = Anti-Corruption Layer
+
+''''
+
+// ── CANVAS 1 ──────────────────────────────────────────────────────────────────
+[[canvas-inspection]]
+=== Canvas 1: Inspection (Edge)
+
+==== Context Identity
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Context Name
+| Inspection
+
+| Strategic Classification
+| *Core Domain* — primary competitive differentiator; real-time defect detection is the product
+
+| Loop
+| Decision Loop (edge)
+
+| Team Ownership
+| Edge Platform Team
+
+| Team Topology Type
+| Platform team — owns EV-07 edge node fleet, HMI firmware, and Inspection context software
+|===
+
+==== Purpose / Mission
+
+____
+Real-time detection of defects on production units at the edge: assigns a Decision to every InspectionCase using versioned DecisionBand thresholds, captures all Overrides with structured ReasonCodes, and forwards closed cases and DriftSignals to downstream contexts.
+____
+
+==== Key Capabilities
+
+[cols="1,8", options="header"]
+|===
+| # | Capability
+
+| 01 | Sub-200 ms inference on live conveyor frames via edge node EV-07
+| 02 | DecisionBand lookup and auto-assignment per active DBV version
+| 03 | HMI alert and operator review flow (thumbnail + ReasonCode gate)
+| 04 | ReasonCode-gated Override capture — enforces AC-01 at HMI layer
+| 05 | InspectionCase lifecycle management: open → reviewed → closed → forwarded
+| 06 | DriftSignal publication on statistical override-rate anomaly
+|===
+
+==== Ubiquitous Language
+
+[cols="3,6,3", options="header"]
+|===
+| Term | Definition within Inspection | Notes
+
+| InspectionCase
+| A single panel inspection event. Aggregates all decisions and overrides for one unit from conveyor arrival to case closure.
+|
+
+| Defect
+| A detected anomaly on a production unit. Classified by DefectType and ConfidenceScore. May or may not result in SCRAP.
+|
+
+| Decision
+| The outcome assigned to an InspectionCase: SCRAP, REWORK, or PASS. Derived from DecisionBand lookup.
+|
+
+| DecisionBand
+| The active mapping from ConfidenceScore ranges to Decision categories. References a versioned DBV from Model Operations.
+|
+
+| ConfidenceScore
+| The raw [0,1] model output. NOT a domain decision. Never displayed directly to the operator.
+|
+
+| Override
+| A structured operator correction of a model Decision. Gated on ReasonCode selection. Creates an AuditEntry.
+| ✅ new from Step 3
+
+| ReasonCode
+| A structured code from the active RCV version. Required to submit any Override. Enforced at HMI layer.
+| ✅ new from Step 3
+
+| DriftSignal
+| A published event raised when override rate exceeds a statistical anomaly threshold. Consumed by Model Operations.
+| ✅ new from Step 3
+
+| HMIAlert
+| The physical and digital notification fired when a Defect is detected. Presents thumbnail and override controls to operator.
+|
+
+| TemporaryBandOverride
+| An emergency, time-limited adjustment to DecisionBand thresholds. Requires ML Engineer + Plant Manager approval. Not HMI-editable.
+| ✅ new from Step 3
+|===
+
+==== Inbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| From | Pattern | Contract | Notes
+
+| Model Operations
+| Customer-Supplier
+| ModelArtifact + DBV push
+| Receives deployed model versions and versioned DecisionBand thresholds. Model Ops is upstream.
+
+| Data / Feature
+| Published Language
+| FeatureSchema event
+| Receives current feature schema version to validate inference inputs.
+|===
+
+==== Outbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| To | Pattern | Contract | Notes
+
+| Case Management
+| Customer-Supplier
+| InspectionCaseForwarded event v1.2
+| Publishes closed InspectionCase with Decision, Override log, and ReasonCodes. Case Mgmt is downstream.
+
+| Model Operations
+| Published Language
+| DriftSignal event
+| Publishes override-rate anomalies for drift monitoring. Inspection does not decide what to do with them.
+|===
+
+==== Domain Events Owned
+
+PanelArrivedOnConveyor · FramesCaptured · DefectDetected · DecisionAssigned · HMIAlertFired · OverrideSubmitted · DecisionAccepted · CaseClosed · InspectionCaseForwarded · DriftSignal
+
+==== Open Questions
+
+[cols="1,3,7", options="header"]
+|===
+| # | Status | Question
+
+| Q1
+| resolved
+| Does TemporaryBandOverride live here or in Model Operations? → Here: it is a runtime adjustment to inference behaviour, not a model governance action. Model Ops approves; Inspection enforces.
+
+| Q2
+| resolved
+| Does FalseOverride event belong here or in Case Management? → Case Management: it is discovered through RCA feedback, not at override time.
+
+| Q3
+| open
+| Should ConfidenceScore be exposed to the operator on the HMI? No decision reached. Carry to Step 5.
+|===
+
+''''
+
+// ── CANVAS 2 ──────────────────────────────────────────────────────────────────
+[[canvas-rca]]
+=== Canvas 2: RCA (Cloud)
+
+==== Context Identity
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Context Name
+| RCA
+
+| Strategic Classification
+| Supporting Subdomain — necessary for the Learning Loop but not the primary differentiator
+
+| Loop
+| Learning Loop (cloud, async)
+
+| Team Ownership
+| AI Research Team
+
+| Team Topology Type
+| Stream-aligned on the Learning Loop — owns LLM/VLM analysis pipeline
+|===
+
+==== Purpose / Mission
+
+____
+Asynchronous root-cause analysis of defect patterns using LLM/VLM: produces RootCauseHypotheses that are advisory outputs only and never actionable without ACL translation inside Case Management. Has no direct dependency on Inspection.
+____
+
+==== Key Capabilities
+
+[cols="1,8", options="header"]
+|===
+| # | Capability
+
+| 01 | Async defect pattern clustering and similarity analysis
+| 02 | LLM/VLM root cause hypothesis generation with evidence references
+| 03 | Hypothesis confidence scoring (raw float — translated downstream by ACL)
+| 04 | CauseVocabularyGap event publication when ACL mapping fails
+| 05 | AnalysisJob lifecycle management: received → running → complete
+|===
+
+==== Ubiquitous Language
+
+[cols="3,6,3", options="header"]
+|===
+| Term | Definition within RCA | Notes
+
+| RootCauseHypothesis
+| LLM-generated advisory output. Contains: hypothesis text, llm_confidence [0,1], evidence_refs[]. ADVISORY ONLY — never stored in Case Management.
+| ✅ key boundary term
+
+| DefectPattern
+| A cluster of related DefectDetected events analysed as a group for common root causes.
+|
+
+| AnalysisJob
+| The unit of work triggered by an RCARequested event. Has its own lifecycle.
+| ✅ new from Step 3
+
+| LLMConfidence
+| Raw float [0,1] confidence of the LLM hypothesis. Mapped to ConfidenceBucket by the Case Management ACL. Never exposed in Case Management domain.
+|
+
+| EvidenceRef
+| A reference to an image batch, override log, or sensor reading used as evidence in hypothesis generation.
+| ✅ new from Step 3
+
+| CauseVocabularyGap
+| Event published when the hypothesis cannot be mapped to any cause_category in the ACL vocabulary. Signals vocabulary needs extension.
+| ✅ new from Step 3
+|===
+
+==== Inbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| From | Pattern | Contract | Notes
+
+| Case Management
+| Customer-Supplier
+| RCARequested event
+| Triggered on OverrideWindow threshold breach. Case Management is upstream (it decides when to request).
+
+| Data / Feature
+| Published Language
+| DefectPattern feed
+| Historical defect pattern data for clustering. RCA does not hold this data itself.
+|===
+
+==== Outbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| To | Pattern | Contract | Notes
+
+| Case Management (ACL)
+| Open Host Service
+| RootCauseHypothesis schema v2.1
+| Published for ACL consumption ONLY. Case Management's ACL translates — raw output never enters Case Management's domain model.
+|===
+
+==== Domain Events Owned
+
+RCARequested · AnalysisJobStarted · DefectPatternClustered · RootCauseSuggested · CauseVocabularyGap
+
+==== Open Questions
+
+[cols="1,3,7", options="header"]
+|===
+| # | Status | Question
+
+| Q1
+| resolved
+| Does RCA receive raw Override logs or pre-processed DefectPatterns? → Pre-processed DefectPatterns only. RCA must not depend on Case Management's internal structure.
+
+| Q2
+| open
+| What is the SLA for AnalysisJob completion after RCARequested? Not yet agreed.
+
+| Q3
+| open
+| Can RCA publish CauseVocabularyGap directly to Product Owner tooling, or must it route through Case Management?
+|===
+
+''''
+
+// ── CANVAS 3 ──────────────────────────────────────────────────────────────────
+[[canvas-case]]
+=== Canvas 3: Case Management (Cloud)
+
+==== Context Identity
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Context Name
+| Case Management
+
+| Strategic Classification
+| Supporting Subdomain — owns the human-in-the-loop workflow and EU AI Act audit boundary
+
+| Loop
+| Learning Loop (cloud)
+
+| Team Ownership
+| Quality Platform Team
+
+| Team Topology Type
+| Stream-aligned on the human approval and audit workflow — owns Case UI, audit log, and ACL implementation
+|===
+
+==== Purpose / Mission
+
+____
+Owns the full lifecycle of a Case from InspectionCase receipt through RCA request, Recommendation creation, human approval, and closure. Enforces the Anti-Corruption Layer on all RCA output. Is the primary EU AI Act audit boundary — every Decision, Override, and Recommendation is traceable here.
+____
+
+==== Key Capabilities
+
+[cols="1,8", options="header"]
+|===
+| # | Capability
+
+| 01 | Case lifecycle management: open → active → pending-approval → closed
+| 02 | Override pattern monitoring and OverrideWindow threshold evaluation (AC-05)
+| 03 | RCA request triggering on threshold breach
+| 04 | ACL translation of RootCauseHypothesis into Recommendation
+| 05 | Human approval gate for all Recommendations — mandatory before action
+| 06 | Immutable AuditEntry creation for every state change (EU AI Act Article 10)
+| 07 | ReasonCodeVocabulary (RCV) management and versioning
+| 08 | CauseVocabularyGap handling and Product Owner notification
+|===
+
+==== Ubiquitous Language
+
+[cols="3,6,3", options="header"]
+|===
+| Term | Definition within Case Management | Notes
+
+| Case
+| Lifecycle wrapper around one or more InspectionCases sharing a defect pattern. NOT the same as InspectionCase.
+|
+
+| Recommendation
+| An ACL-translated, actionable instruction derived from RootCauseHypothesis. Requires human approval before any action.
+| ✅ new from Step 3 (moved from RCA)
+
+| ConfidenceBucket
+| ACL mapping of LLMConfidence: High ≥0.80, Medium 0.50–0.79, Low <0.50. The only RCA-derived term allowed in this domain model.
+| ✅ new from Step 3
+
+| AuditEntry
+| Immutable record of every state change. Contains actor, timestamp, action, linked ID, and RCV version if Override. EU AI Act Article 10 record.
+|
+
+| OverrideWindow
+| Rolling 24 h window per DefectType counting model-error ReasonCategory Overrides toward the RCA trigger threshold.
+| ✅ new from Step 3
+
+| ReasonCodeVocabulary (RCV)
+| Versioned set of valid ReasonCodes. Owned by this context. Current version: RCV-1 (6 codes). Reviewed quarterly.
+| ✅ new from Step 3
+
+| ReasonCategory
+| model-error (RC-03, RC-04, RC-05) triggers RCA; material-variation (RC-01, RC-02) does not.
+| ✅ new from Step 3
+
+| EscalationFlag
+| Set on Cases where RC-07 ('other') was used. Triggers mandatory supervisor review.
+| ✅ new from Step 3
+
+| CauseVocabularyGap
+| Received from RCA via ACL. Holds Recommendation in 'unclassified' state pending vocabulary extension.
+| ✅ new from Step 3
+|===
+
+==== Inbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| From | Pattern | Contract | Notes
+
+| Inspection
+| Customer-Supplier
+| InspectionCaseForwarded event v1.2
+| Source of truth for Case creation. Inspection is upstream.
+
+| RCA (via ACL)
+| Anti-Corruption Layer
+| RootCauseHypothesis schema v2.1
+| ACL translates to Recommendation. Raw LLM output is never stored in this context's domain model.
+|===
+
+==== Outbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| To | Pattern | Contract | Notes
+
+| RCA
+| Customer-Supplier
+| RCARequested event
+| Triggers RCA AnalysisJob on OverrideWindow threshold breach.
+
+| Reporting / External (MES)
+| Open Host Service
+| AuditLog export API v1
+| EU AI Act Article 10 compliance export. Read-only, stable, versioned.
+|===
+
+==== Domain Events Owned
+
+CaseOpened · RCARequested · RecommendationCreated · RecommendationApproved · RecommendationRejected · CaseClosed · EscalationFlagSet · CauseVocabularyGapReceived · AuditEntryCreated · FalseOverrideRegistered
+
+==== EU AI Act Obligations
+
+[cols="1,8", options="header"]
+|===
+| # | Obligation
+
+| ⚖1
+| AuditEntry is the Article 10 record — immutable, actor-attributed, timestamped. Every Decision and Override must produce one.
+
+| ⚖2
+| Human approval gate on every Recommendation constitutes documented human oversight as required for high-risk AI system classification.
+
+| ⚖3
+| ReasonCodeVocabulary versioning ensures Override rationale is structured and auditable. RCV version is pinned to each AuditEntry.
+
+| ⚖4
+| AuditLog export API provides regulators with traceable decision records including model version, operator, timestamp, and ReasonCode.
+|===
+
+==== Open Questions
+
+[cols="1,3,7", options="header"]
+|===
+| # | Status | Question
+
+| Q1 (AC-08)
+| open
+| When RCARequested fires for a DefectType that already has an open AnalysisJob, does the new breach append evidence or open a duplicate? Must resolve before designing Case aggregate state machine.
+
+| Q2 (AC-14)
+| open
+| What is the SLA for resolving a CauseVocabularyGap before the Recommendation times out? Must agree before sprint 1.
+
+| Q3
+| resolved
+| Does ReasonCodeVocabulary live here or in Data/Feature? → Here: tightly coupled to Override validation logic. Data/Feature would introduce shared-kernel coupling.
+|===
+
+''''
+
+// ── CANVAS 4 ──────────────────────────────────────────────────────────────────
+[[canvas-modelops]]
+=== Canvas 4: Model Operations (Cloud)
+
+==== Context Identity
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Context Name
+| Model Operations
+
+| Strategic Classification
+| Supporting Subdomain — enables the Core Domain but is not the differentiator
+
+| Loop
+| Learning Loop (cloud)
+
+| Team Ownership
+| MLOps Platform Team
+
+| Team Topology Type
+| Platform team — owns retraining pipeline, edge deployment toolchain, and model registry
+|===
+
+==== Purpose / Mission
+
+____
+Manages the full lifecycle of ML model artifacts: deployment to edge nodes, drift monitoring via DriftSignal events, retraining pipeline orchestration, and DecisionBand versioning and governance.
+____
+
+==== Key Capabilities
+
+[cols="1,8", options="header"]
+|===
+| # | Capability
+
+| 01 | Model artifact versioning and registry
+| 02 | Edge deployment orchestration to EV-07 fleet
+| 03 | Drift evaluation from received DriftSignal events
+| 04 | DecisionBandVersion (DBV) governance: authorship, approval, versioning, review cadence
+| 05 | RetrainingJob pipeline trigger and orchestration
+| 06 | TemporaryBandOverride approval workflow
+| 07 | ModelVersion pinning per production lot for traceability
+|===
+
+==== Ubiquitous Language
+
+[cols="3,6,3", options="header"]
+|===
+| Term | Definition within Model Operations | Notes
+
+| ModelVersion
+| A specific trained model artifact. Versioned, signed, and pinned to production lot for traceability.
+|
+
+| DecisionBandVersion (DBV)
+| Versioned DecisionBand configuration. Owned here. Requires ML Engineer authorship + Plant Manager approval. Referenced by Inspection.
+| ✅ new from Step 3
+
+| DriftSignal
+| Received from Inspection. Triggers drift evaluation workflow. Does not automatically trigger retraining.
+| ✅ new from Step 3
+
+| RetrainingJob
+| Orchestrated pipeline producing a new ModelVersion from an updated TrainingDataset.
+| ✅ new from Step 3
+
+| DeploymentSlot
+| An edge node (EV-07) target for a ModelVersion push.
+| ✅ new from Step 3
+
+| PerformanceMetric
+| Statistical measures tracked per ModelVersion per lot: precision, recall, override rate.
+| ✅ new from Step 3
+
+| TemporaryBandOverride
+| Emergency time-limited adjustment to active DBV thresholds. Approved here, enforced by Inspection.
+| ✅ new from Step 3
+
+| ReviewOverdueAlert
+| Domain event raised when a DBV passes its review_date without renewal. Sent to Plant Manager.
+| ✅ new from Step 3
+|===
+
+==== Inbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| From | Pattern | Contract | Notes
+
+| Inspection
+| Published Language
+| DriftSignal event
+| Override-rate anomaly triggers drift evaluation. Does not mandate retraining — owner decision required (H6).
+
+| Data / Feature
+| Customer-Supplier
+| TrainingDataset delivery
+| Provides labelled data for RetrainingJob. Data/Feature is upstream.
+|===
+
+==== Outbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| To | Pattern | Contract | Notes
+
+| Inspection
+| Customer-Supplier
+| ModelArtifact + DBV push
+| Deploys new ModelVersion and DecisionBandVersion to edge fleet. Inspection is downstream.
+
+| Data / Feature
+| Customer-Supplier
+| RetrainingRequest
+| Requests a new TrainingDataset specifying required DefectTypes, quantity, and quality thresholds.
+|===
+
+==== Domain Events Owned
+
+DriftSignalReceived · DriftEvaluationStarted · RetrainingTriggered · ModelRetrained · ModelDeployed · DBVCreated · DBVApproved · ReviewOverdueAlert · TemporaryBandOverrideActivated
+
+==== Open Questions
+
+[cols="1,3,7", options="header"]
+|===
+| # | Status | Question
+
+| Q1 (H6)
+| open
+| Who owns the retraining decision? What is the RACI for RetrainingJob approval? Must resolve before designing this context's outbound contracts. Do not proceed to Step 5 without this.
+
+| Q2 (H7)
+| open
+| Should retraining be fully automated on DriftSignal, or does it require an explicit human trigger? Directly affects the policy in the EventStorming model.
+
+| Q3
+| resolved
+| Does TemporaryBandOverride require its own sub-context? → No: it is a governed exception to DBV, not a separate capability. Approval workflow owned here; enforcement delegated to Inspection.
+|===
+
+''''
+
+// ── CANVAS 5 ──────────────────────────────────────────────────────────────────
+[[canvas-data]]
+=== Canvas 5: Data / Feature (Cloud)
+
+==== Context Identity
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Context Name
+| Data / Feature
+
+| Strategic Classification
+| Generic Subdomain — data pipeline tooling is not differentiating; the data itself is
+
+| Loop
+| Learning Loop (cloud)
+
+| Team Ownership
+| Data Engineering Team
+
+| Team Topology Type
+| Platform team — cross-cutting enabler for Model Operations and RCA
+|===
+
+==== Purpose / Mission
+
+____
+Provides training data, feature schemas, and data lineage records to Model Operations. Enforces EU AI Act Article 10 data governance — every TrainingDataset has documented origin, quality checks, and lineage trace. Generates synthetic data to fill DefectType gaps.
+____
+
+==== Key Capabilities
+
+[cols="1,8", options="header"]
+|===
+| # | Capability
+
+| 01 | Training data curation and labelling pipeline
+| 02 | FeatureSchema publication and versioning
+| 03 | DataLineage tracking: origin, transform history, version
+| 04 | SyntheticSample generation for DataGap filling (GAN / diffusion)
+| 05 | DataGap detection and DataGapAlert event publication
+| 06 | EU AI Act Article 10 data quality documentation per TrainingDataset
+|===
+
+==== Ubiquitous Language
+
+[cols="3,6,3", options="header"]
+|===
+| Term | Definition within Data / Feature | Notes
+
+| TrainingDataset
+| A versioned, quality-checked collection of labelled InspectionCase images. Delivered to Model Operations on RetrainingRequest.
+|
+
+| FeatureSchema
+| Published specification of input feature format expected by a ModelVersion. Versioned; consumed by Inspection.
+|
+
+| DataLineage
+| Full provenance trace from raw sensor data through labelling to TrainingDataset inclusion. Required for Article 10.
+|
+
+| SyntheticSample
+| A GAN/diffusion-generated training image for rare DefectTypes with insufficient real examples.
+| ✅ new from Step 3
+
+| DataGap
+| A detected deficit of labelled examples for a DefectType below the minimum threshold for reliable model training.
+| ✅ new from Step 3
+
+| DataGapAlert
+| Domain event raised when a DataGap is detected. Triggers the SyntheticSample generation pipeline.
+| ✅ new from Step 3
+|===
+
+==== Inbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| From | Pattern | Contract | Notes
+
+| Inspection (historical archive)
+| Published Language
+| Closed InspectionCase archive
+| Historical closed cases with labels used as the primary training data source.
+
+| Model Operations
+| Customer-Supplier
+| RetrainingRequest
+| Specifies required DefectTypes, minimum quantity, and quality thresholds. Model Ops is upstream (it requests).
+|===
+
+==== Outbound Dependencies
+
+[cols="3,3,3,5", options="header"]
+|===
+| To | Pattern | Contract | Notes
+
+| Model Operations
+| Customer-Supplier
+| TrainingDataset delivery
+| Versioned, lineage-documented dataset. Data/Feature is upstream here.
+
+| Inspection
+| Published Language
+| FeatureSchema event
+| Published on every FeatureSchema version bump. Inspection subscribes.
+
+| RCA
+| Published Language
+| DefectPattern feed
+| Historical defect pattern data consumed by RCA for clustering.
+|===
+
+==== Domain Events Owned
+
+RetrainingRequestReceived · DataGapDetected · DataGapAlert · SyntheticSampleGenerated · TrainingDatasetDelivered · FeatureSchemaPublished · DataLineageRecorded
+
+==== EU AI Act Obligations
+
+[cols="1,8", options="header"]
+|===
+| # | Obligation
+
+| ⚖1
+| TrainingDataset versioning combined with DataLineage constitutes the Article 10 data governance obligation for training data transparency.
+
+| ⚖2
+| DataGap detection prevents model training on insufficient class examples — addresses Article 10 data representativeness requirement.
+
+| ⚖3
+| SyntheticSample generation must be documented in DataLineage records for transparency. Synthetic data must be labelled as such.
+
+| ⚖4
+| Quality-check records per TrainingDataset are part of the Article 10 technical documentation required for high-risk AI system classification.
+|===
+
+==== Open Questions
+
+[cols="1,3,7", options="header"]
+|===
+| # | Status | Question
+
+| Q1
+| resolved
+| Should ReasonCodeVocabulary (owned by Case Management) be shared here for label taxonomy alignment? → No. Read-only reference only. Labellers consume it as a lookup table. Data/Feature does not own or extend the vocabulary.
+
+| Q2
+| open
+| Should SyntheticSample generation be a capability of this context or a separate GenAI context? Evaluate at next architecture review.
+|===
+
+''''
+
+// ── CROSS-CANVAS SUMMARY ─────────────────────────────────────────────────────
+[[summary]]
+=== Cross-Canvas Summary
+
+==== Open Questions Across All Contexts (carry to Step 5: Context Mapping)
+
+[cols="2,5,3", options="header"]
+|===
+| Context | Open question | Priority for Step 5
+
+| Inspection
+| Should ConfidenceScore be exposed to the operator on the HMI?
+| Medium
+
+| RCA
+| SLA for AnalysisJob completion after RCARequested?
+| Medium
+
+| RCA
+| CauseVocabularyGap routing — directly to PO tooling or through Case Management?
+| Medium
+
+| Case Management (AC-08)
+| Duplicate RCA job handling — append evidence or open new job?
+| High — blocks aggregate design
+
+| Case Management (AC-14)
+| CauseVocabularyGap resolution SLA before Recommendation timeout?
+| High — blocks sprint 1
+
+| Model Operations (H6)
+| RACI for retraining decision — who approves RetrainingJob?
+| Critical — blocks Step 5
+
+| Model Operations (H7)
+| Automated vs human-triggered retraining on DriftSignal?
+| High — affects Policy P04
+
+| Data / Feature
+| SyntheticSample generation — this context or a separate GenAI context?
+| Low — defer to architecture review
+|===
+
+[TIP]
+====
+*Facilitator note for Step 5:* Two items must be resolved before drawing the Context Map: H6 (retraining decision ownership — the RACI determines which team signs off on the Model Operations outbound contract to Inspection) and AC-08 (duplicate RCA job — determines the cardinality of the RCARequested relationship between Case Management and RCA). Assign both to the Product Owner and Plant Manager before the Step 5 session begins.
+====

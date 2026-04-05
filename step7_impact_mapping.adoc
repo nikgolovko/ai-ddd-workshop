@@ -1,0 +1,687 @@
+= Step 7: Impact Mapping
+VQS DDD Workshop · Step 7 of 7
+:doctype: article
+:icons: font
+:source-highlighter: rouge
+:toc: left
+:toc-title: Contents
+:toclevels: 2
+:sectnums:
+:sectnumlevels: 2
+
+// ============================================================
+//  ABOUT THIS DOCUMENT
+// ============================================================
+[.lead]
+This document provides two things for Step 7 of the VQS DDD Workshop:
+
+. A *blank template* for facilitating an Impact Mapping session (Section 1).
+. A *fully worked example* for the VQS system connecting all deliverables to a measurable business goal (Section 2).
+
+Duration: *45 minutes*. +
+Goal: Connect every deliverable to measurable business value. Cut anything without a path to the goal. Outputs are features. Impacts are behaviour changes. Do not confuse them.
+
+=== The Four Levels of an Impact Map
+
+[cols="2,5,3", options="header"]
+|===
+| Level | Question | Example
+
+| *Goal*
+| What are we trying to achieve? Must be measurable and time-bound.
+| "Reduce defect escape rate by 30% in 6 months"
+
+| *Actors*
+| Who needs to behave differently for the goal to be reached?
+| Quality Engineer, ML Engineer, Plant Manager, Regulator
+
+| *Impacts*
+| How should the actor's behaviour change?
+| "QE makes override decisions in under 30 seconds"
+
+| *Deliverables*
+| What do we build to enable the impact?
+| "Real-time HMI alert with thumbnail and reason code selector"
+|===
+
+[WARNING]
+====
+The most common mistake in Impact Mapping is confusing *Impacts* (behaviour changes) with *Deliverables* (features). An Impact is something an actor does differently. A Deliverable is something the team ships. A dashboard is a deliverable. Seeing defect trends earlier and making better staffing decisions is the impact the dashboard enables.
+====
+
+=== The Cut List
+
+Every deliverable that cannot be traced to an actor impact on the goal map belongs on the cut list. Put it there explicitly. This is the most valuable output of the session.
+
+''''
+
+// ============================================================
+//  PART I — BLANK TEMPLATE
+// ============================================================
+[[template]]
+== Template (fill during session)
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| ___________________________
+
+| Facilitator
+| ___________________________
+
+| Participants
+| ___________________________
+
+| Input from Step 6
+| User Story Map · MVP slice · scope decisions · EU AI Act stories
+|===
+
+=== Business Goal
+
+[NOTE]
+====
+Measurable, time-bound, and owned. If you cannot measure it at the end of the period, it is not a goal — it is an aspiration. Push for numbers.
+====
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Goal statement
+| ___________________________________________________________
+
+| Current baseline
+| ___
+
+| Target
+| ___
+
+| Time horizon
+| ___
+
+| Measurement method
+| ___
+
+| Goal owner
+| ___
+|===
+
+=== Actor Branch: [Actor Name]
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Actor name and role
+| ___
+
+| Why this actor matters to the goal
+| ___
+|===
+
+==== Impacts (behaviour changes needed)
+
+[cols="1,7,3", options="header"]
+|===
+| # | Impact — what this actor does differently | Can we measure it?
+
+| I1 | ___ | Yes / No — metric: ___
+| I2 | ___ | Yes / No — metric: ___
+|===
+
+==== Deliverables (what we build to enable the impacts)
+
+[cols="1,5,3,3", options="header"]
+|===
+| # | Deliverable | Enables impact | Release
+
+| D1 | ___ | I___ | MVP / R2 / R3
+| D2 | ___ | I___ | MVP / R2 / R3
+| D3 | ___ | I___ | MVP / R2 / R3
+|===
+
+==== Success Metric
+
+____
+How will we know this actor's impact has been achieved?
+
+___________________________________________________________
+____
+
+// (copy Actor Branch block above for each additional actor)
+
+=== Cut List — Deliverables with No Impact Path
+
+[cols="5,5", options="header"]
+|===
+| Deliverable | Why it was cut
+
+| ___ | ___
+| ___ | ___
+| ___ | ___
+|===
+
+=== Priority Matrix
+
+Map deliverables across impact × feasibility to identify the highest-value starting point.
+
+[cols="1,4,4,4", options="header"]
+|===
+| | High feasibility | Medium feasibility | Low feasibility
+
+| High impact
+| ___ (do first)
+| ___ (plan carefully)
+| ___ (strategic investment)
+
+| Medium impact
+| ___ (fill sprint)
+| ___ (deprioritise)
+| ___ (cut or defer)
+
+| Low impact
+| ___ (cut)
+| ___ (cut)
+| ___ (cut)
+|===
+
+=== Workshop Output Summary
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| Business goal agreed, measurable, time-bound | [ ] done
+| All actors identified including Regulator | [ ] done
+| Impacts stated per actor (behaviour changes) | [ ] done
+| Deliverables traced to impacts | [ ] done
+| Success metrics agreed per actor | [ ] done
+| Cut list explicit | [ ] done
+|===
+
+''''
+
+// ============================================================
+//  PART II — FILLED EXAMPLE
+// ============================================================
+[[example]]
+== Filled Example — VQS Edge Inspection System
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-08
+
+| Facilitator
+| Dr. N. Golovko
+
+| Participants
+| Tim B. (Product Owner) · Jana R. (Plant Manager) · Petra K. (Quality Engineer) · Sven M. (ML Engineer)
+
+| Input from Step 6
+| User Story Map · 8 MVP stories · 5 EU AI Act stories · 4 NF stories · scope decisions for 5 items
+|===
+
+=== Business Goal
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Goal statement
+| Reduce the defect escape rate on Line 3 by 30% within six months of production deployment of the VQS system.
+
+| Current baseline
+| 12 defect escapes per 1,000 inspected units (Q1 2026 average, Line 3)
+
+| Target
+| ≤ 8.4 defect escapes per 1,000 inspected units
+
+| Time horizon
+| Six months from production go-live
+
+| Measurement method
+| Weekly defect escape log maintained by Plant Manager. An escape is defined as a defective unit confirmed downstream of the inspection station. Counted per lot, reported weekly.
+
+| Goal owner
+| Jana R. (Plant Manager) — accountable for line quality metrics
+|===
+
+''''
+
+=== Actor Branch: Quality Engineer (Petra)
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Actor name and role
+| Quality Engineer — Petra K. and her peers on all three shifts
+
+| Why this actor matters to the goal
+| The Quality Engineer is the primary human decision-maker in the Decision Loop. Her override decisions are the most direct signal of model quality. If she makes faster, better-structured override decisions, the system learns faster and the escape rate falls.
+|===
+
+==== Impacts
+
+[cols="1,7,3", options="header"]
+|===
+| # | Impact | Measurable?
+
+| I-QE-1
+| Makes override decisions in under 30 seconds instead of the current average of 90 seconds (estimated from Story B timing).
+| Yes — AuditEntry timestamps: median override decision time per shift
+
+| I-QE-2
+| Selects a structured reason code on every override instead of leaving free-text or no justification.
+| Yes — AuditEntry completeness: % of overrides with a valid ReasonCode (target: 100%)
+
+| I-QE-3
+| Escalates to the shift lead via a formal channel (EscalationFlag) instead of verbally when unsure, so the escalation is recorded.
+| Yes — EscalationFlag count per shift week over week
+|===
+
+==== Deliverables
+
+[cols="1,6,3,3", options="header"]
+|===
+| # | Deliverable | Enables impact | Release
+
+| D-QE-1
+| HMI alert with panel thumbnail and Decision displayed within 200 ms of defect detection (MVP-01, MVP-03)
+| I-QE-1
+| MVP
+
+| D-QE-2
+| Reason code selector on HMI — 6 codes from RCV-1, submission blocked without selection (MVP-04, MVP-05)
+| I-QE-2
+| MVP
+
+| D-QE-3
+| EscalationFlag auto-set when RC-07 ('other') is selected, with mandatory free-text prompt (AC-02)
+| I-QE-3
+| MVP
+
+| D-QE-4
+| Override confirmation screen showing: selected reason code, DefectType, ConfidenceScore, and active DBV version — so Petra has full context before confirming
+| I-QE-1 + I-QE-2
+| R2
+|===
+
+==== Success Metric
+
+____
+Median override decision time below 30 seconds across all shifts. Override ReasonCode completeness at 100% within four weeks of MVP go-live. EscalationFlag usage increasing (not zero) — indicates the feature is used, not bypassed.
+____
+
+''''
+
+=== Actor Branch: ML Engineer (Sven)
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Actor name and role
+| ML Engineer — Sven M. responsible for model quality and retraining pipeline
+
+| Why this actor matters to the goal
+| The ML Engineer controls the Learning Loop. If he detects drift earlier and acts on structured override data, model quality improves and the escape rate falls. Today he is the last to know about problems — the system must reverse this.
+|===
+
+==== Impacts
+
+[cols="1,7,3", options="header"]
+|===
+| # | Impact | Measurable?
+
+| I-MLE-1
+| Detects model drift within 2 hours of onset instead of the current 72-hour average (lighting-change incident benchmark).
+| Yes — DriftSignal latency: time from override rate anomaly onset to DriftSignal receipt by Model Operations
+
+| I-MLE-2
+| Acts on structured, reason-coded override data instead of reviewing raw free-text logs, reducing investigation time per drift event.
+| Yes — Time from DriftSignal to root cause hypothesis (logged in RCA AnalysisJob timestamps)
+
+| I-MLE-3
+| Initiates retraining with documented evidence (Plant Manager approval, dataset lineage) instead of ad hoc recalibration.
+| Yes — RetrainingJob records: % of retraining events with approved RACI-v1 sign-off
+|===
+
+==== Deliverables
+
+[cols="1,6,3,3", options="header"]
+|===
+| # | Deliverable | Enables impact | Release
+
+| D-MLE-1
+| DriftSignal event published by Inspection within 15 minutes of override rate anomaly onset and delivered to Model Operations within 15 minutes (NF-06)
+| I-MLE-1
+| R2
+
+| D-MLE-2
+| Override data includes structured ReasonCode and ReasonCategory, enabling ML Engineer to filter model-error overrides from material-variation overrides in analysis (MVP-04, AC-07)
+| I-MLE-2
+| MVP
+
+| D-MLE-3
+| RetrainingJob record carrying Plant Manager approval, dataset lineage_record_id, and performance metrics (R3-01, R3-02, EU-04)
+| I-MLE-3
+| R3
+|===
+
+==== Success Metric
+
+____
+DriftSignal latency below 2 hours in at least 90% of drift events within the first three months post-Release 2. Mean time from DriftSignal to ML Engineer triage action below 4 hours. 100% of RetrainingJobs carry documented Plant Manager approval.
+____
+
+''''
+
+=== Actor Branch: Plant Manager (Jana)
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Actor name and role
+| Plant Manager — Jana R. accountable for line throughput and defect escape rate
+
+| Why this actor matters to the goal
+| The Plant Manager owns the business goal. She needs enough visibility to govern the system without being pulled into every decision. She also holds the approval gate for retraining — if that gate is too slow, the Learning Loop stalls.
+|===
+
+==== Impacts
+
+[cols="1,7,3", options="header"]
+|===
+| # | Impact | Measurable?
+
+| I-PM-1
+| Approves or defers retraining requests within 24 hours of receipt, with full evidence, instead of approving ad hoc or not being asked at all.
+| Yes — RACI-v1 approval latency: time from RetrainingRequest to Plant Manager sign-off
+
+| I-PM-2
+| Reviews and approves new DecisionBandVersions with full context (model performance data, drift history) instead of rubber-stamping ML Engineer proposals.
+| Yes — DBV approval time and % with attached supporting evidence
+
+| I-PM-3
+| Monitors defect escape rate trend weekly from a single report instead of triangulating across multiple disconnected systems.
+| Yes — Report usage: weekly report generated and accessed by Plant Manager
+|===
+
+==== Deliverables
+
+[cols="1,6,3,3", options="header"]
+|===
+| # | Deliverable | Enables impact | Release
+
+| D-PM-1
+| RetrainingRequest carrying: DriftSignal evidence, override rate trend, dataset lineage summary, and ML Engineer recommendation — delivered to Plant Manager for approval (R3-02)
+| I-PM-1
+| R3
+
+| D-PM-2
+| DBV approval workflow: ML Engineer submits DBV with performance evidence; Plant Manager receives approval request in Case Management UI (AC-11, MVP-08)
+| I-PM-2
+| MVP
+
+| D-PM-3
+| Weekly defect escape rate report: escape rate per 1,000 units, override rate per DefectType, DriftSignal count, Recommendations actioned vs pending — exported from AuditLog API (R3-04)
+| I-PM-3
+| R3
+|===
+
+==== Success Metric
+
+____
+Plant Manager retraining approval latency below 24 hours in 95% of cases. DBV approval requests carrying supporting evidence in 100% of cases by Release 2. Weekly report accessed by Plant Manager every week within two weeks of Release 3 go-live.
+____
+
+''''
+
+=== Actor Branch: Regulator / Auditor
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Actor name and role
+| Regulator / Auditor — EU AI Act compliance authority; internal quality auditor
+
+| Why this actor matters to the goal
+| The VQS system is classified as a high-risk AI system under EU AI Act. Without satisfying the Regulator actor, the system cannot legally operate. This is a hard constraint, not a nice-to-have — Regulator deliverables belong in MVP regardless of their contribution to the escape rate goal.
+|===
+
+==== Impacts
+
+[cols="1,7,3", options="header"]
+|===
+| # | Impact | Measurable?
+
+| I-REG-1
+| Can retrieve a complete, tamper-proof audit trail for any InspectionCase or time period without requiring internal system access.
+| Yes — AuditLog API availability and completeness: 100% of InspectionCases queryable within 24 hours of closure
+
+| I-REG-2
+| Can verify that every AI-assisted decision was made with a documented model version, decision boundary, and human oversight record.
+| Yes — AuditEntry completeness audit: model_version, dbv_version, operator_id, and ReasonCode present on 100% of entries
+
+| I-REG-3
+| Can verify that every Recommendation derived from LLM output was reviewed and approved by a human before any corrective action was taken.
+| Yes — Recommendation approval gate: 100% of actioned Recommendations carry an approval record with Case Manager ID and timestamp
+
+| I-REG-4
+| Can verify the provenance and quality of training data used in any model version deployed to production.
+| Yes — DataLineage completeness: 100% of RetrainingJobs carry a valid lineage_record_id with synthetic_sample_count
+|===
+
+==== Deliverables
+
+[cols="1,6,3,3", options="header"]
+|===
+| # | Deliverable | Enables impact | Release
+
+| D-REG-1
+| AuditLog export API v1: queryable by InspectionCase ID, time range, DefectType, operator ID. Returns immutable AuditEntries with all required fields (EU-05)
+| I-REG-1
+| MVP
+
+| D-REG-2
+| AuditEntry completeness enforcement: every InspectionCase closure event must carry model_version, dbv_version, operator_id, ReasonCode (if override), and RCV version — enforced at write time (EU-01, MVP-06)
+| I-REG-2
+| MVP
+
+| D-REG-3
+| Recommendation approval gate in Case Management: every Recommendation requires Case Manager approval record before status changes to actioned (R2-03, EU-03)
+| I-REG-3
+| R2
+
+| D-REG-4
+| TrainingDataset lineage_record_id mandatory field with synthetic_sample_count on every RetrainingJob delivery (EU-04)
+| I-REG-4
+| R3
+
+| D-REG-5
+| AuditEntry write-once enforcement: no system component or operator may modify or delete an AuditEntry after creation (NF-02)
+| I-REG-1 + I-REG-2
+| MVP
+|===
+
+==== Success Metric
+
+____
+Zero findings in the first EU AI Act Article 10 compliance audit. AuditLog API returns complete records for 100% of InspectionCases queried. Recommendation approval gate enforced on 100% of actioned Recommendations from Release 2 go-live.
+____
+
+''''
+
+=== Cut List — Deliverables with No Impact Path
+
+[cols="5,5", options="header"]
+|===
+| Deliverable | Why it was cut
+
+| Automated retraining pipeline (R3-01, R3-02 deferred from MVP)
+| No actor needs automated retraining to achieve the 30% escape rate reduction in 6 months. Manual-trigger retraining is sufficient. Moves to Release 3. Revisit at 3-month review.
+
+| Plant Manager shift dashboard (R3-04 deferred from MVP)
+| The AuditLog export API (D-REG-1) already enables the Plant Manager to get the data she needs in MVP. A dedicated dashboard adds UX value but does not directly improve escape rate. Moves to Release 3.
+
+| Environmental context logging (R3-03 deferred)
+| Sensor infrastructure for lighting and temperature is not available at MVP timeline. Required to improve DriftSignal quality — schedule for Release 3 when sensor rollout is confirmed.
+
+| Synthetic data generation (R3-05 deferred)
+| DataGap detection is sufficient for MVP. Automated SyntheticSample generation requires GenAI pipeline work estimated at 6 sprints. Defer until Release 3.
+
+| Override rate trend visualisation (R2-05 deferred from MVP)
+| ML Engineer can monitor override rates via raw AuditLog export in MVP. Visualisation is a Release 2 quality-of-life improvement. No actor's behaviour changes if it is delayed from MVP.
+
+| Explainability dashboard for operators
+| No actor requested this. The ConfidenceScore is available in the AuditEntry but exposing it on the HMI requires a UI investment not linked to any identified impact. Parked — raise if escape rate target is missed.
+|===
+
+=== Priority Matrix
+
+[cols="1,4,4,4", options="header"]
+|===
+| | High feasibility | Medium feasibility | Low feasibility
+
+| *High impact*
+| D-QE-1 (HMI alert) · D-QE-2 (reason code selector) · D-REG-5 (write-once AuditEntry)
+| D-MLE-1 (DriftSignal < 2h) · D-REG-3 (Recommendation approval gate)
+| D-MLE-3 (RetrainingJob with RACI)
+
+| *Medium impact*
+| D-QE-3 (EscalationFlag) · D-REG-2 (AuditEntry completeness) · D-PM-2 (DBV approval workflow)
+| D-REG-1 (AuditLog API) · D-MLE-2 (structured override data)
+| D-PM-1 (RetrainingRequest to PM)
+
+| *Low impact*
+| D-QE-4 (override confirmation screen) — Release 2
+| D-PM-3 (weekly report) — Release 3
+| D-REG-4 (DataLineage enforcement) — Release 3
+|===
+
+Do first: D-QE-1, D-QE-2, D-REG-5, D-REG-2 — they are high-impact, high-feasibility, and constitute the core MVP.
+
+=== Workshop Output Summary
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| Business goal agreed, measurable, time-bound
+| ✅ done — 30% escape rate reduction in 6 months, measured weekly
+
+| All actors identified including Regulator
+| ✅ done — 4 actors: Quality Engineer, ML Engineer, Plant Manager, Regulator
+
+| Impacts stated per actor (behaviour changes, not features)
+| ✅ done — 11 impacts across 4 actors
+
+| Deliverables traced to impacts
+| ✅ done — 18 deliverables across 4 actors and 3 releases
+
+| Success metrics agreed per actor
+| ✅ done — quantitative metrics for all 4 actors
+
+| Cut list explicit
+| ✅ done — 6 items cut with documented rationale
+|===
+
+''''
+
+// ============================================================
+//  WORKSHOP COMPLETE — FINAL SUMMARY
+// ============================================================
+[[workshop-summary]]
+== Workshop Complete — Full Output Summary
+
+Seven sessions. One coherent system. This section summarises what the workshop produced across all seven steps.
+
+=== What Was Decided
+
+[cols="2,7", options="header"]
+|===
+| Decision | Detail
+
+| Core domain identified
+| Inspection (Edge) — real-time defect detection is the competitive differentiator. Invest deeply.
+
+| 5 bounded contexts
+| Inspection · RCA · Case Management · Model Operations · Data / Feature
+
+| 6 integration boundaries named
+| Customer-Supplier (×4) · Open Host Service → ACL (×1) · Published Language (×1)
+
+| ACL mandatory
+| RCA output must never enter Case Management without ACL translation. Non-negotiable architectural principle.
+
+| 14 acceptance criteria
+| 12 agreed · 2 resolved in Step 5 (AC-08, H6)
+
+| 8 new domain concepts
+| ReasonCode · ReasonCodeVocabulary · OverrideWindow · ReasonCategory · DecisionBandVersion · TemporaryBandOverride · ConfidenceBucket · CauseVocabularyGap
+
+| MVP scope
+| 8 user stories · 5 EU AI Act stories · 4 NF stories · 4 actors · 6 cut items with rationale
+
+| Business goal
+| 30% defect escape rate reduction in 6 months from production go-live on Line 3
+|===
+
+=== What Remains Open
+
+[cols="3,5,3", options="header"]
+|===
+| Item | Description | Owner
+
+| Q — DriftSignal environmental context
+| Schema extension to include environmental_context_flags pending sensor infrastructure rollout.
+| Edge Platform Team · Data Engineering Team
+
+| Q — RCA AnalysisJob SLA
+| No SLA agreed for AnalysisJob completion. Affects AC-14 CauseVocabularyGap timeout.
+| AI Research Team · Product Owner
+
+| Q — HMI ConfidenceScore exposure
+| Whether to show ConfidenceScore to Quality Engineer on HMI. Deferred to UX research.
+| Product Owner · Quality Platform Team
+
+| Q — SyntheticSample context
+| Whether SyntheticSample generation stays in Data / Feature or becomes a separate GenAI context.
+| Data Engineering Team · Architecture review
+|===
+
+=== The Three Feedback Loops — Final Status
+
+[cols="4,3,4", options="header"]
+|===
+| Loop | MVP status | Full status (Release 2 + 3)
+
+| Override → Drift Detection
+| Partially fixed: DriftSignal published in MVP; latency target (< 2 h) requires Release 2 pipeline work.
+| ✅ fully closed in Release 2
+
+| DriftDetected → ML Engineer awareness
+| Fixed: DriftSignal replaces weekly report. Release 2 delivers the alert mechanism.
+| ✅ fully closed in Release 2
+
+| RCA Report → Model Recalibration
+| Not closed in MVP. Manual retraining with RACI-v1 approval is the minimum governance. Automated pipeline is Release 3.
+| ✅ fully closed in Release 3
+|===
+
+[NOTE]
+====
+All three feedback loops identified as broken in Step 1 (Domain Storytelling) are now addressed in the release plan. The DDD workshop produced the structural clarity needed to close them deliberately rather than accidentally.
+====

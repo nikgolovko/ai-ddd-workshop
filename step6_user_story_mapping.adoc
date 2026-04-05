@@ -1,0 +1,507 @@
+= Step 6: User Story Mapping
+VQS DDD Workshop · Step 6 of 7
+:doctype: article
+:icons: font
+:source-highlighter: rouge
+:toc: left
+:toc-title: Contents
+:toclevels: 2
+:sectnums:
+:sectnumlevels: 2
+
+// ============================================================
+//  ABOUT THIS DOCUMENT
+// ============================================================
+[.lead]
+This document provides two things for Step 6 of the VQS DDD Workshop:
+
+. A *blank template* for facilitating a User Story Mapping session (Section 1).
+. A *fully worked example* covering the complete VQS workflow across three releases (Section 2).
+
+Duration: *90 minutes*. +
+Goal: Align development priorities with real user workflow. Define the MVP slice. Make scope trade-offs explicit and visible. Ensure EU AI Act audit trail stories appear in the MVP, not a later release.
+
+=== How a User Story Map Works
+
+[cols="2,8", options="header"]
+|===
+| Dimension | Content
+
+| Horizontal (left → right)
+| The *workflow backbone* — the user activities in the order they happen in real life. Maximum 6–8 backbone steps. These are verbs: Detect, Assign, Investigate, Override, Escalate, Retrain.
+
+| Vertical (top → bottom)
+| *Story depth* — the stories that flesh out each backbone step. Stories nearer the top are more important. Draw a horizontal release line: everything above is MVP, everything below goes to a later release.
+
+| Rows (user roles)
+| Optional. Place user role cards above the backbone to show which actor drives each step.
+|===
+
+=== User Story Format
+
+Use the standard Given/When/Then or role/feature/benefit form.
+
+Recommended short form for story cards:
+
+----
+As a [role]
+I need to [action]
+So that [outcome]
+----
+
+=== Release Line Definition
+
+[cols="2,8", options="header"]
+|===
+| Release | Criterion for inclusion
+
+| MVP
+| Required to deliver the core value proposition AND meet all regulatory compliance obligations. Nothing more.
+
+| Release 2
+| Makes the system smarter or more efficient. Delivers the Learning Loop. Not required for go-live.
+
+| Release 3 / Backlog
+| Future value. Depends on Release 2 outcomes or organisational readiness. Do not over-specify.
+|===
+
+''''
+
+// ============================================================
+//  PART I — BLANK TEMPLATE
+// ============================================================
+[[template]]
+== Template (fill during session)
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| ___________________________
+
+| Facilitator
+| ___________________________
+
+| Participants
+| ___________________________
+
+| Input from Step 5
+| Context Map · 6 integration boundaries · ACL contract stubs · EU AI Act boundaries
+|===
+
+=== User Roles
+
+[cols="3,7", options="header"]
+|===
+| Role | Description / goal in the system
+
+| ___ | ___
+| ___ | ___
+| ___ | ___
+| ___ | ___
+|===
+
+=== Workflow Backbone
+
+[cols="1,3,7", options="header"]
+|===
+| # | Backbone step (verb) | User activity description
+
+| 1 | ___ | ___
+| 2 | ___ | ___
+| 3 | ___ | ___
+| 4 | ___ | ___
+| 5 | ___ | ___
+| 6 | ___ | ___
+|===
+
+=== MVP Stories (above the release line)
+
+[cols="1,3,6,3", options="header"]
+|===
+| ID | Backbone step | Story | Role
+
+| MVP-01 | ___ | As a ___, I need to ___ so that ___ | ___
+| MVP-02 | ___ | As a ___, I need to ___ so that ___ | ___
+| MVP-03 | ___ | As a ___, I need to ___ so that ___ | ___
+| MVP-04 | ___ | As a ___, I need to ___ so that ___ | ___
+| MVP-05 | ___ | As a ___, I need to ___ so that ___ | ___
+| MVP-06 | ___ | As a ___, I need to ___ so that ___ | ___
+| MVP-07 | ___ | As a ___, I need to ___ so that ___ | ___
+| MVP-08 | ___ | As a ___, I need to ___ so that ___ | ___
+|===
+
+=== Release 2 Stories
+
+[cols="1,3,6,3", options="header"]
+|===
+| ID | Backbone step | Story | Role
+
+| R2-01 | ___ | As a ___, I need to ___ so that ___ | ___
+| R2-02 | ___ | As a ___, I need to ___ so that ___ | ___
+| R2-03 | ___ | As a ___, I need to ___ so that ___ | ___
+| R2-04 | ___ | As a ___, I need to ___ so that ___ | ___
+| R2-05 | ___ | As a ___, I need to ___ so that ___ | ___
+| R2-06 | ___ | As a ___, I need to ___ so that ___ | ___
+|===
+
+=== Release 3 / Backlog Stories
+
+[cols="1,3,6,3", options="header"]
+|===
+| ID | Backbone step | Story | Role
+
+| R3-01 | ___ | As a ___, I need to ___ so that ___ | ___
+| R3-02 | ___ | As a ___, I need to ___ so that ___ | ___
+| R3-03 | ___ | As a ___, I need to ___ so that ___ | ___
+|===
+
+=== Non-Functional Stories (explicit — must appear on the map)
+
+[WARNING]
+====
+Non-functional requirements are often invisible in story maps. Make them explicit cards and place them in the correct release. These are not optional.
+====
+
+[cols="1,5,3,3", options="header"]
+|===
+| ID | Non-functional requirement | Release | Backbone step
+
+| NF-01 | ___ | MVP | ___
+| NF-02 | ___ | MVP | ___
+| NF-03 | ___ | MVP | ___
+| NF-04 | ___ | R2 | ___
+|===
+
+=== EU AI Act Stories (explicit — must be in MVP)
+
+[WARNING]
+====
+Every story required for EU AI Act Article 10 compliance must be in the MVP slice. These are not optional and cannot be deferred.
+====
+
+[cols="1,6,3", options="header"]
+|===
+| ID | Story | Backbone step
+
+| EU-01 | ___ | ___
+| EU-02 | ___ | ___
+| EU-03 | ___ | ___
+|===
+
+=== Scope Decisions Made
+
+Record every explicit scope decision — especially items moved out of MVP.
+
+[cols="5,4", options="header"]
+|===
+| Item moved out of MVP | Reason
+
+| ___ | ___
+| ___ | ___
+| ___ | ___
+|===
+
+=== Carry-Forward to Step 7: Impact Mapping
+
+[cols="5,3", options="header"]
+|===
+| Output | Status
+
+| Backbone agreed | [ ] done
+| MVP slice defined | [ ] done
+| Release 2 and 3 stories identified | [ ] done
+| Non-functional stories placed explicitly | [ ] done
+| EU AI Act stories in MVP | [ ] done
+| Scope decisions recorded | [ ] done
+|===
+
+''''
+
+// ============================================================
+//  PART II — FILLED EXAMPLE
+// ============================================================
+[[example]]
+== Filled Example — VQS Edge Inspection System
+
+=== Session Metadata
+
+[cols="2,5", options="header"]
+|===
+| Field | Value
+
+| Date
+| 2026-04-08
+
+| Facilitator
+| Dr. N. Golovko
+
+| Participants
+| Tim B. (Product Owner) · Petra K. (Quality Engineer) · Sven M. (ML Engineer) · Jana R. (Plant Manager) · Dev Lead
+
+| Input from Step 5
+| Context Map with 6 boundaries · ACL contract stubs · 4 EU AI Act boundaries · open question on DriftSignal environmental context
+|===
+
+=== User Roles
+
+[cols="3,7", options="header"]
+|===
+| Role | Description / goal in the system
+
+| Quality Engineer (Petra)
+| Operates on the shop floor. Needs fast, confident decisions. Wants to understand when the model is wrong without reading a dashboard.
+
+| ML Engineer (Sven)
+| Responsible for model quality. Needs early drift signals and structured feedback to improve models without waiting for weekly reports.
+
+| Plant Manager (Jana)
+| Accountable for line throughput and defect escape rate. Needs visibility across shifts without being in the loop for every decision.
+
+| Case Manager
+| Reviews RCA Recommendations and approves or rejects them before any corrective action. Needs enough context to make an informed decision quickly.
+
+| Regulator / Auditor
+| Needs a complete, tamper-proof audit trail of every AI-assisted decision and every human override for EU AI Act compliance.
+|===
+
+=== Workflow Backbone
+
+[cols="1,3,7", options="header"]
+|===
+| # | Backbone step | User activity description
+
+| 1
+| Detect
+| The system detects a potential defect on a production unit in real time. The edge model runs inference and produces a Decision.
+
+| 2
+| Assign
+| A Decision (SCRAP / REWORK / PASS) is assigned to the InspectionCase from the active DecisionBand. The panel is physically routed by the diverter.
+
+| 3
+| Review
+| The Quality Engineer is alerted and reviews the HMI. She confirms or overrides the Decision, selecting a reason code if overriding.
+
+| 4
+| Investigate
+| When override patterns breach the threshold, a root cause analysis is triggered. An LLM analyses the defect pattern and produces a hypothesis, translated into a Recommendation by the ACL.
+
+| 5
+| Approve
+| The Case Manager reviews the Recommendation and approves or rejects it. This is the human oversight gate required by EU AI Act.
+
+| 6
+| Retrain
+| When drift is confirmed, a retraining pipeline is initiated with Plant Manager approval. A new model version is produced, validated, and deployed to the edge fleet.
+|===
+
+=== MVP Stories (above the release line)
+
+[cols="1,2,7,3", options="header"]
+|===
+| ID | Backbone step | Story | Role
+
+| MVP-01
+| Detect
+| As a Quality Engineer, I need the edge system to detect defects in real time (< 200 ms) so that I can review decisions without slowing the line.
+| Quality Engineer
+
+| MVP-02
+| Assign
+| As a Quality Engineer, I need the system to auto-assign a Decision from the active versioned DecisionBand so that the diverter routes panels correctly without requiring my input for every panel.
+| Quality Engineer
+
+| MVP-03
+| Review
+| As a Quality Engineer, I need to see an HMI alert with a panel thumbnail and the assigned Decision so that I can judge whether the model was correct.
+| Quality Engineer
+
+| MVP-04
+| Review
+| As a Quality Engineer, I need to override a Decision by selecting a structured reason code from the active vocabulary so that my correction is structured enough to drive retraining and audit.
+| Quality Engineer
+
+| MVP-05
+| Review
+| As a Quality Engineer, I need the system to block Override submission if no reason code is selected so that unstructured overrides cannot enter the audit log.
+| Quality Engineer
+
+| MVP-06
+| Assign
+| As an Auditor, I need every InspectionCase to carry a model version reference, the active DBV version, the operator ID, and the ReasonCode so that every AI-assisted decision is traceable.
+| Regulator / Auditor
+
+| MVP-07
+| Review
+| As an Auditor, I need every Override to create an immutable AuditEntry in Case Management so that the audit trail cannot be altered after the fact.
+| Regulator / Auditor
+
+| MVP-08
+| Assign
+| As a Plant Manager, I need any DecisionBand threshold change to require my approval before taking effect so that I retain governance over the decision boundaries of the AI system.
+| Plant Manager
+|===
+
+=== Release 2 Stories
+
+[cols="1,2,7,3", options="header"]
+|===
+| ID | Backbone step | Story | Role
+
+| R2-01
+| Investigate
+| As a Case Manager, I need to be alerted when an override pattern breaches the RCA threshold so that I can trigger a root cause analysis without waiting for someone to notice manually.
+| Case Manager
+
+| R2-02
+| Investigate
+| As a Case Manager, I need the RCA system to present a structured Recommendation (not raw LLM output) with a ConfidenceBucket rating so that I have enough context to approve or reject it without being an ML expert.
+| Case Manager
+
+| R2-03
+| Approve
+| As a Case Manager, I need to approve or reject a Recommendation and have my decision logged in the AuditEntry so that every human-in-the-loop action is traceable for EU AI Act compliance.
+| Case Manager
+
+| R2-04
+| Detect
+| As an ML Engineer, I need to receive a DriftSignal event within 2 hours of onset so that I can investigate model degradation before it causes a significant production impact.
+| ML Engineer
+
+| R2-05
+| Investigate
+| As an ML Engineer, I need to see the override rate trend per DefectType over rolling windows so that I can assess whether a DriftSignal represents a genuine drift or a transient spike.
+| ML Engineer
+
+| R2-06
+| Investigate
+| As a Case Manager, I need the system to raise a CauseVocabularyGap alert when the RCA cannot classify a hypothesis so that I know to escalate to the Product Owner for vocabulary extension before actioning.
+| Case Manager
+|===
+
+=== Release 3 / Backlog Stories
+
+[cols="1,2,7,3", options="header"]
+|===
+| ID | Backbone step | Story | Role
+
+| R3-01
+| Retrain
+| As an ML Engineer, I need a retraining pipeline that automatically packages the latest training data, trains a new model version, and presents it for Plant Manager approval so that I do not have to orchestrate the pipeline manually.
+| ML Engineer
+
+| R3-02
+| Retrain
+| As a Plant Manager, I need to receive a retraining approval request with evidence (DriftSignal data, performance metrics, dataset lineage) so that I can approve or defer the retraining with full context.
+| Plant Manager
+
+| R3-03
+| Detect
+| As an ML Engineer, I need the edge node to log environmental context (lighting level, temperature, shift identifier) alongside each InspectionCase so that DriftSignals caused by environmental change can be distinguished from genuine model degradation.
+| ML Engineer
+
+| R3-04
+| Assign
+| As a Plant Manager, I need a shift-level dashboard showing defect detection rate, override rate, and false-positive rate per DefectType so that I can monitor line quality without being in the detailed review loop.
+| Plant Manager
+
+| R3-05
+| Investigate
+| As an ML Engineer, I need the system to automatically generate a synthetic training dataset for DefectTypes where real examples fall below the minimum threshold so that model retraining is not blocked by data scarcity.
+| ML Engineer
+|===
+
+=== Non-Functional Stories
+
+[cols="1,6,3,2", options="header"]
+|===
+| ID | Non-functional requirement | Release | Backbone step
+
+| NF-01
+| Edge inference latency must be below 200 ms from frame capture to Decision assignment under normal operating conditions.
+| MVP
+| Detect
+
+| NF-02
+| The AuditEntry log must be tamper-proof. Once written, no AuditEntry may be modified or deleted by any system component or operator.
+| MVP
+| Review / Approve
+
+| NF-03
+| The InspectionCaseForwarded event must be delivered at-least-once and Case Management must handle duplicate delivery idempotently. Edge nodes may buffer events for up to 60 seconds during network interruption.
+| MVP
+| Detect → Review
+
+| NF-04
+| The Override reason code vocabulary (RCV) must be version-controlled. The active RCV version must be pinned to every AuditEntry at write time.
+| MVP
+| Review
+
+| NF-05
+| Every ModelArtifact deployed to the edge fleet must be retained for at least 90 days after decommissioning for post-incident investigation.
+| R2
+| Retrain
+
+| NF-06
+| The DriftSignal event must reach Model Operations within 15 minutes of being emitted by the edge node under normal network conditions.
+| R2
+| Detect
+|===
+
+=== EU AI Act Stories
+
+[cols="1,6,2", options="header"]
+|===
+| ID | Story | Backbone step
+
+| EU-01
+| As an Auditor, I need every InspectionCase to carry: model_version, dbv_version, operator_id, ReasonCode (if override), and RCV version so that every AI-assisted decision can be traced to its exact decision boundary configuration and human actor.
+| Assign / Review
+
+| EU-02
+| As an Auditor, I need every AuditEntry to be immutable and timestamped so that the sequence of decisions and overrides cannot be altered for any InspectionCase or Case.
+| Review / Approve
+
+| EU-03
+| As an Auditor, I need every Recommendation produced from an RCA to carry the analysis_job_id linking it to the original LLM evidence so that every human approval decision is traceable to its AI-generated rationale.
+| Approve
+
+| EU-04
+| As an Auditor, I need every TrainingDataset used in a RetrainingJob to carry a DataLineage record documenting its origin, quality checks, and synthetic sample count so that the technical documentation for the high-risk AI system classification is complete.
+| Retrain
+
+| EU-05
+| As an Auditor, I need the Case Management AuditLog to be exportable via a stable API so that I can retrieve complete decision records for a specified time period or InspectionCase ID without requiring access to the internal system.
+| Review
+|===
+
+=== Scope Decisions Made
+
+[cols="5,5", options="header"]
+|===
+| Item moved out of MVP | Reason
+
+| Automated retraining pipeline (R3-01, R3-02)
+| No actor needs automated retraining to achieve the 30% escape rate reduction goal in 6 months. Manual-trigger retraining with Plant Manager approval is sufficient for MVP.
+
+| Plant Manager shift dashboard (R3-04)
+| The Plant Manager's primary need is addressed by the AuditLog export. A dedicated dashboard adds UX value but does not reduce defect escape rate directly.
+
+| Environmental context logging (R3-03)
+| Sensor infrastructure for lighting and temperature logging is not available at MVP. Required for DriftSignal quality improvement — schedule for Release 3.
+
+| Synthetic data generation (R3-05)
+| DataGap detection is sufficient for MVP. Automated SyntheticSample generation requires GenAI pipeline work that is out of scope for the initial release.
+
+| Override rate trend visualisation (R2-05)
+| ML Engineer can monitor override rates via raw AuditLog export in MVP. A visualisation layer is a Release 2 quality-of-life improvement.
+|===
+
+[TIP]
+====
+*Facilitator note for Step 7:* The Impact Map must connect every MVP story to one of the four actors and their measurable impact. EU stories (EU-01 through EU-05) map to the Regulator actor. Non-functional stories (NF-01 through NF-04) typically map to the Quality Engineer or Plant Manager actors. Any deliverable in the map that cannot be traced to an actor impact should be moved to the cut list.
+====
